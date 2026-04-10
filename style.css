@@ -1,0 +1,87 @@
+/* Custom Variables to match Pelican/Purple vibe */
+:root {
+    --bg-dark: #09090b;
+    --card-bg: #111115;
+    --accent-purple: #a855f7;
+    --accent-low: rgba(168, 85, 247, 0.1);
+    --border-color: #27272a;
+}
+
+/* 1. The Background Glow - Adds depth without images */
+body {
+    background-color: var(--bg-dark);
+    background-image:
+    radial-gradient(circle at 0% 0%, rgba(168, 85, 247, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(168, 85, 247, 0.05) 0%, transparent 50%);
+    min-height: 100vh;
+}
+
+/* 2. Premium Card Hover Effect */
+.glass-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, var(--accent-low) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.glass-card:hover::before {
+    opacity: 1;
+}
+
+.glass-card:hover {
+    border-color: var(--accent-purple);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px var(--accent-low);
+}
+
+/* 3. Animated Gradient Text */
+.premium-text {
+    background: linear-gradient(90deg, #fff, var(--accent-purple), #fff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 5s linear infinite;
+}
+
+@keyframes shine {
+    to { background-position: 200% center; }
+}
+
+/* 4. The Pelican-Style Buttons */
+.btn-premium {
+    background: var(--accent-purple);
+    color: white;
+    font-weight: 700;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1;
+}
+
+.btn-premium:hover {
+    box-shadow: 0 0 30px var(--accent-purple);
+    filter: brightness(1.1);
+}
+
+/* 5. Smooth Section Reveals */
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}

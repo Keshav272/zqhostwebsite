@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZQ Hosting | Elite Minecraft Game Hosting</title>
+    <link rel="icon" type="image/png" href="ZQ_logo.png" />
+    <meta name="description" content="ZQ Hosting — Premium Minecraft server hosting on high-performance Asian nodes. Ultra-low latency, 5Tbps DDoS protection, instant deployment.">
+    <meta property="og:title" content="ZQ Hosting | Elite Minecraft Game Hosting">
+    <meta property="og:description" content="Deploy your dream SMP on high-performance CPUs. Industry-leading uptime with heavy-duty DDoS protection.">
+    <meta property="og:image" content="ZQ_logo.png">
+    <meta property="og:type" content="website">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-deep: #040407;
+            --card-base: rgba(12, 12, 18, 0.75);
+            --accent: #a855f7;
+            --accent-glow: rgba(168, 85, 247, 0.25);
+            --border: rgba(255, 255, 255, 0.07);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-deep);
+            color: #fafafa;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* ─── FONT ─── */
+        h1, h2, h3, h4, .brand { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        /* ─── NAV ─── */
+        nav {
+            background: rgba(4, 4, 7, 0.75);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border);
+            transition: background 0.4s ease;
+        }
+
+        /* ─── ORB BLOBS ─── */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -1;
+            opacity: 0;
+            animation: orbFloat 25s infinite alternate ease-in-out, orbFadeIn 2s forwards;
+        }
+        .orb-1 { width: 600px; height: 600px; background: var(--accent); top: -15%; left: -12%; animation-delay: 0s, 0.3s; }
+        .orb-2 { width: 450px; height: 450px; background: #6366f1; bottom: -15%; right: -10%; animation-delay: -8s, 0.6s; }
+        .orb-3 { width: 300px; height: 300px; background: #ec4899; top: 40%; left: 50%; animation-delay: -14s, 0.9s; opacity: 0; }
+
+        @keyframes orbFadeIn { to { opacity: 0.12; } }
+        @keyframes orbFloat {
+            0% { transform: translate(0,0) scale(1); }
+            33% { transform: translate(30px, -40px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.97); }
+            100% { transform: translate(15px, -15px) scale(1.03); }
+        }
+
+        /* ─── CURSOR GLOW ─── */
+        #cursor-glow {
+            position: fixed;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(168,85,247,0.1) 0%, transparent 65%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s;
+        }
+
+        /* ─── PARTICLE CANVAS ─── */
+        #particle-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* ─── GLASS CARDS ─── */
+        .glass-card {
+            background: var(--card-base);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.55s cubic-bezier(0.16,1,0.3,1), border-color 0.4s, box-shadow 0.4s;
+        }
+
+        .glass-card.overflow-visible-badge {
+            overflow: visible;
+        }
+
+        .glass-card.overflow-visible-badge::after {
+            border-radius: 2.5rem;
+        }
+
+        .glass-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(168,85,247,0.08), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .glass-card:hover::after { opacity: 1; }
+
+        .glass-card:hover {
+            border-color: rgba(168,85,247,0.5);
+            box-shadow: 0 0 50px rgba(168,85,247,0.15), 0 30px 60px rgba(0,0,0,0.5);
+            transform: translateY(-12px) scale(1.015);
+        }
+
+        /* ─── SHIMMER TEXT ─── */
+        .premium-text {
+            background: linear-gradient(110deg, #fff 20%, #a855f7 50%, #fff 80%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textShimmer 4s linear infinite;
+        }
+        @keyframes textShimmer { to { background-position: 200% center; } }
+
+        /* ─── BUTTONS ─── */
+        .btn-premium {
+            background: var(--accent);
+            box-shadow: 0 0 24px rgba(168,85,247,0.4);
+            transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
+        }
+        .btn-premium::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .btn-premium:hover::before { opacity: 1; }
+        .btn-premium:hover {
+            transform: scale(1.06) translateY(-3px);
+            box-shadow: 0 0 40px rgba(168,85,247,0.6), 0 12px 32px rgba(0,0,0,0.4);
+        }
+        .btn-premium:active { transform: scale(0.98); }
+
+        /* ─── REVEAL ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* stagger children */
+        .stagger-children > * { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+        .stagger-children.active > *:nth-child(1) { opacity:1; transform:translateY(0); transition-delay:0.05s; }
+        .stagger-children.active > *:nth-child(2) { opacity:1; transform:translateY(0); transition-delay:0.15s; }
+        .stagger-children.active > *:nth-child(3) { opacity:1; transform:translateY(0); transition-delay:0.25s; }
+        .stagger-children.active > *:nth-child(4) { opacity:1; transform:translateY(0); transition-delay:0.35s; }
+
+        /* ─── HERO HEADLINE ─── */
+        .hero-headline {
+            animation: heroIn 1.2s cubic-bezier(0.16,1,0.3,1) both;
+        }
+        @keyframes heroIn {
+            from { opacity: 0; transform: translateY(60px) scale(0.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* ─── ANIMATED BADGE ─── */
+        .badge-pulse::before {
+            content: '';
+            display: inline-block;
+            width: 7px; height: 7px;
+            background: #4ade80;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: blink 1.4s ease-in-out infinite;
+        }
+        @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+        /* ─── BACK TO TOP ─── */
+        #backToTop {
+            position: fixed;
+            bottom: 32px; right: 32px;
+            width: 52px; height: 52px;
+            background: var(--accent);
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            color: white; cursor: pointer; z-index: 100;
+            opacity: 0; transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+            transform: translateY(30px) scale(0.8);
+            box-shadow: 0 8px 24px rgba(168,85,247,0.4);
+        }
+        #backToTop.show { opacity:1; transform:translateY(0) scale(1); }
+        #backToTop:hover { transform: translateY(-4px) scale(1.1); }
+
+        /* ─── MODALS ─── */
+        .modal-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.92);
+            z-index: 200;
+            display: flex; align-items: center; justify-content: center;
+            padding: 24px;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.35s ease;
+        }
+        .modal-overlay.open { opacity: 1; pointer-events: all; }
+        .modal-box {
+            background: rgba(15,15,22,0.98);
+            border: 1px solid rgba(168,85,247,0.25);
+            border-radius: 2.5rem;
+            padding: 3rem;
+            max-width: 560px; width: 100%;
+            position: relative;
+            transform: scale(0.88) translateY(30px);
+            transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .modal-overlay.open .modal-box { transform: scale(1) translateY(0); }
+        .modal-close-btn {
+            position: absolute; top: 1.5rem; right: 1.5rem;
+            width: 36px; height: 36px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; color: #71717a;
+            transition: all 0.25s;
+        }
+        .modal-close-btn:hover { background: rgba(168,85,247,0.15); color: white; border-color: var(--accent); }
+
+        /* ─── DOCS LIST ─── */
+        .docs-item {
+            display: flex; align-items: flex-start; gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .docs-item:last-child { border-bottom: none; }
+        .docs-icon { width: 36px; height: 36px; background: rgba(168,85,247,0.12); border-radius: 10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+
+        /* ─── STAT COUNTER ─── */
+        .stat-num {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ─── SCROLLBAR ─── */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0f; }
+        ::-webkit-scrollbar-thumb { background: rgba(168,85,247,0.4); border-radius: 99px; }
+
+        /* ─── PRICE SLASHED ─── */
+        .price-slashed { text-decoration: line-through; color: #3f3f46; font-size: 1rem; font-weight: 600; margin-right: 6px; }
+
+        /* ─── SECTION DIVIDER ─── */
+        .divider { width: 60px; height: 3px; background: linear-gradient(90deg, var(--accent), transparent); border-radius: 999px; }
+
+        /* ─── LOGO LINK ─── */
+        .logo-link { display:flex; align-items:center; gap:10px; text-decoration:none; transition: opacity 0.2s; }
+        .logo-link:hover { opacity:0.85; }
+
+        /* ─── FEATURE ICON RING ─── */
+        .icon-ring {
+            width: 56px; height: 56px;
+            background: rgba(168,85,247,0.1);
+            border: 1px solid rgba(168,85,247,0.2);
+            border-radius: 16px;
+            display:flex; align-items:center; justify-content:center;
+            margin-bottom: 1.25rem;
+            transition: all 0.3s;
+        }
+        .glass-card:hover .icon-ring {
+            background: rgba(168,85,247,0.2);
+            box-shadow: 0 0 20px rgba(168,85,247,0.3);
+        }
+
+        /* ─── GRID PATTERN OVERLAY ─── */
+        .grid-pattern {
+            position: absolute; inset: 0;
+            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+        }
+
+        /* ─── HERO FADE IN DELAY ─── */
+        .fade-d1 { animation: heroIn 1.2s cubic-bezier(0.16,1,0.3,1) 0.1s both; }
+        .fade-d2 { animation: heroIn 1.2s cubic-bezier(0.16,1,0.3,1) 0.25s both; }
+        .fade-d3 { animation: heroIn 1.2s cubic-bezier(0.16,1,0.3,1) 0.4s both; }
+        .fade-d4 { animation: heroIn 1.2s cubic-bezier(0.16,1,0.3,1) 0.55s both; }
+        .fade-d5 { animation: heroIn 1.2s cubic-bezier(0.16,1,0.3,1) 0.7s both; }
+    </style>
+</head>
+<body>
+
+    <!-- Particle canvas -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Cursor glow -->
+    <div id="cursor-glow"></div>
+
+    <!-- Back to Top -->
+    <div id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- ─── NAV ─── -->
+    <nav class="fixed w-full top-0 flex items-center justify-between px-6 md:px-12 py-4 z-50">
+        <!-- LOGO (clickable, links to top) -->
+        <a href="#" class="logo-link" aria-label="ZQ Hosting Home">
+            <img src="ZQ_logo.png" alt="ZQ Logo" class="h-9 w-9 object-contain rounded-lg" onerror="this.style.display='none'" />
+            <span class="brand text-xl font-black tracking-tight uppercase">ZQ<span class="text-purple-500">Hosting</span></span>
+        </a>
+        <div class="hidden lg:flex gap-10 text-[11px] font-bold tracking-widest text-zinc-400">
+            <a href="#" class="hover:text-purple-400 transition">HOME</a>
+            <a href="#plans" class="hover:text-purple-400 transition">PRICING</a>
+            <a href="#features" class="hover:text-purple-400 transition">FEATURES</a>
+            <a href="https://dsc.gg/zqhosting" target="_blank" class="hover:text-purple-400 transition">SUPPORT</a>
+        </div>
+        <a href="https://panel.zqhost.qzz.io" target="_blank" class="btn-premium px-7 py-3 rounded-full text-xs font-black uppercase tracking-wider">
+            <i class="fas fa-ghost mr-2"></i>Client Panel
+        </a>
+    </nav>
+    <!-- ─── HERO ─── -->
+    <header class="relative pt-36 pb-28 px-6 text-center overflow-hidden">
+        <div class="grid-pattern"></div>
+        <div class="flex flex-col items-center mb-10">
+            <div class="text-3xl font-black uppercase tracking-tight">ZQ<span class="text-purple-500">Hosting</span></div>
+            <p class="text-zinc-500 text-sm mt-1 tracking-widest font-semibold uppercase">Elite Minecraft Game Hosting</p>
+        </div>
+        <!-- Live badge -->
+        <div class="fade-d1 inline-flex items-center px-5 py-2 rounded-full border border-purple-500/20 bg-purple-500/10 text-purple-300 text-[11px] font-bold tracking-[0.2em] uppercase mb-10 backdrop-blur-md badge-pulse">
+            Premium Asian Nodes &nbsp;·&nbsp; Lowest Latency
+        </div>
+
+        <!-- Headline -->
+        <h1 class="fade-d2 text-6xl md:text-8xl font-black mb-6 tracking-tighter leading-[0.88]" style="font-family: 'Plus Jakarta Sans', sans-serif">
+            Performance<br><span class="premium-text">Redefined.</span>
+        </h1>
+
+        <!-- Sub -->
+        <p class="fade-d3 text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto mb-14 font-light leading-relaxed">
+            Deploy your dream SMP on high-performance CPUs — industry-leading uptime with heavy-duty DDoS protection, built for Asia.
+        </p>
+
+        <!-- CTAs -->
+        <div class="fade-d4 flex flex-col sm:flex-row justify-center gap-5 mb-20">
+            <a href="#plans" class="btn-premium px-12 py-5 rounded-2xl font-extrabold text-lg uppercase tracking-wide">
+                <i class="fas fa-rocket mr-2"></i>Deploy Now
+            </a>
+            <a href="https://dsc.gg/zqhosting" target="_blank" class="px-12 py-5 rounded-2xl border border-zinc-800 bg-zinc-900/40 font-extrabold text-lg hover:bg-zinc-800 hover:border-zinc-600 transition-all backdrop-blur-md uppercase tracking-wide">
+                <i class="fab fa-discord mr-2 text-[#5865F2]"></i>Join Discord
+            </a>
+        </div>
+
+    </header>
+
+    <!-- ─── FEATURES ─── -->
+    <section id="features" class="py-32 max-w-7xl mx-auto px-6 relative z-10">
+        <div class="reveal text-center mb-16">
+            <p class="text-purple-400 text-xs font-black tracking-[0.25em] uppercase mb-3">Why ZQ?</p>
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-5 premium-text" style="font-family: 'Plus Jakarta Sans', sans-serif">Host Without Compromise</h2>
+            <div class="divider mx-auto"></div>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 stagger-children reveal">
+            <div class="glass-card p-8 rounded-3xl">
+                <div class="icon-ring"><i class="fas fa-bolt text-purple-400 text-xl"></i></div>
+                <h4 class="font-bold text-lg mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif">Instant Setup</h4>
+                <p class="text-zinc-500 text-sm leading-relaxed">Automated systems deploy your server nodes in seconds — zero wait, zero friction.</p>
+            </div>
+            <div class="glass-card p-8 rounded-3xl">
+                <div class="icon-ring"><i class="fas fa-shield-halved text-purple-400 text-xl"></i></div>
+                <h4 class="font-bold text-lg mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif">Anti-DDoS</h4>
+                <p class="text-zinc-500 text-sm leading-relaxed">12Tbps+ mitigation capacity keeps your community online — always.</p>
+            </div>
+            <div class="glass-card p-8 rounded-3xl">
+                <div class="icon-ring"><i class="fas fa-microchip text-purple-400 text-xl"></i></div>
+                <h4 class="font-bold text-lg mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif">High Clock Speed</h4>
+                <p class="text-zinc-500 text-sm leading-relaxed">Top-tier CPUs with maximum single-thread performance for silky-smooth gameplay.</p>
+            </div>
+            <div class="glass-card p-8 rounded-3xl">
+                <div class="icon-ring"><i class="fas fa-terminal text-purple-400 text-xl"></i></div>
+                <h4 class="font-bold text-lg mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif">Pelican Panel</h4>
+                <p class="text-zinc-500 text-sm leading-relaxed">Modern dashboard for file management, plugin control, and real-time console.</p>
+            </div>
+        </div>
+
+        <!-- Stats bar -->
+        <div class="reveal flex flex-wrap justify-center gap-12 mt-20 pt-12 border-t border-zinc-900">
+            <div class="text-center">
+                <div class="stat-num text-4xl" data-count="99.9" data-suffix="%">0</div>
+                <div class="text-xs text-zinc-500 font-bold tracking-widest uppercase mt-1">Uptime</div>
+            </div>
+            <div class="w-px h-12 bg-zinc-800 self-center hidden sm:block"></div>
+            <div class="text-center">
+                <div class="stat-num text-4xl" data-count="5" data-suffix="Tbps">0</div>
+                <div class="text-xs text-zinc-500 font-bold tracking-widest uppercase mt-1">DDoS Shield</div>
+            </div>
+            <div class="w-px h-12 bg-zinc-800 self-center hidden sm:block"></div>
+            <div class="text-center">
+                <div class="stat-num text-4xl" data-count="30" data-suffix="ms">0</div>
+                <div class="text-xs text-zinc-500 font-bold tracking-widest uppercase mt-1">Avg Latency</div>
+            </div>
+            <div class="w-px h-12 bg-zinc-800 self-center hidden sm:block"></div>
+            <div class="text-center">
+                <div class="stat-num text-4xl" data-count="24" data-suffix="/7">0</div>
+                <div class="text-xs text-zinc-500 font-bold tracking-widest uppercase mt-1">Support</div>
+            </div>
+        </div>
+    </section>
+    <section id="plans" class="py-32 max-w-7xl mx-auto px-6 reveal relative z-10">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-extrabold mb-4 premium-text">Choose Your Tier</h2>
+            <div class="w-20 h-1 bg-purple-600 mx-auto rounded-full"></div>
+        </div>
+        <div class="grid lg:grid-cols-3 gap-8">
+            <div class="glass-card p-10 rounded-[2.5rem] flex flex-col h-full border-zinc-800">
+                <h3 class="text-zinc-500 font-bold uppercase tracking-widest text-xs mb-4">Dirt Plan</h3>
+                <div class="flex items-baseline mb-8">
+                    <span class="price-slashed">₹100</span>
+                    <span class="text-5xl font-black">₹49</span>
+                    <span class="text-zinc-500 text-sm font-normal">/month</span>
+                </div>
+                <ul class="space-y-5 text-zinc-400 mb-12 flex-grow text-sm">
+                    <li><i class="fas fa-check text-purple-500 mr-3"></i> 2 Core CPU</li>
+                    <li><i class="fas fa-check text-purple-500 mr-3"></i> 8 GB RAM</li>
+                    <li><i class="fas fa-folder text-purple-500 mr-3"></i> Pelican UI Access</li>
+                    <li><i class="fas fa-database text-purple-500 mr-3"></i> 1 Managed Backup</li>
+                </ul>
+                <button onclick="openModal('purchase-modal')" class="w-full py-5 rounded-2xl btn-premium font-black uppercase tracking-widest text-xs">Purchase</button>
+            </div>
+
+            <div class="glass-card overflow-visible-badge p-10 rounded-[2.5rem] flex flex-col h-full border-purple-500/50 scale-105 z-20">
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-purple-600 text-[10px] font-black px-5 py-1.5 rounded-full uppercase tracking-tighter shadow-lg">Most Popular</div>
+                <h3 class="text-purple-400 font-bold uppercase tracking-widest text-xs mb-4">Gold Plan</h3>
+                <div class="flex items-baseline mb-8">
+                    <span class="price-slashed">₹150</span>
+                    <span class="text-6xl font-black">₹89</span>
+                    <span class="text-zinc-500 text-sm font-normal">/month</span>
+                </div>
+                <ul class="space-y-5 text-zinc-300 mb-12 flex-grow text-sm">
+                    <li><i class="fas fa-check text-purple-500 mr-3"></i> 3 Core CPU</li>
+                    <li><i class="fas fa-check text-purple-500 mr-3"></i> 12 GB RAM</li>
+                    <li><i class="fas fa-database text-purple-500 mr-3"></i> 3 Managed Backups</li>
+                    <li><i class="fas fa-plug text-purple-500 mr-3"></i> Premium Plugins Kit</li>
+                </ul>
+                <button onclick="openModal('purchase-modal')" class="w-full py-5 rounded-2xl btn-premium font-black uppercase tracking-widest text-xs">Purchase</button>
+            </div>
+
+            <div class="glass-card p-10 rounded-[2.5rem] flex flex-col h-full border-zinc-800">
+                <h3 class="text-zinc-500 font-bold uppercase tracking-widest text-xs mb-4">Diamond Plan</h3>
+                <div class="flex items-baseline mb-8">
+                    <span class="price-slashed">₹200</span>
+                    <span class="text-5xl font-black">₹129</span>
+                    <span class="text-zinc-500 text-sm font-normal">/month</span>
+                </div>
+                <ul class="space-y-5 text-zinc-400 mb-12 flex-grow text-sm">
+                    <li><i class="fas fa-check text-purple-500 mr-3"></i> 4 Core CPU</li>
+                    <li><i class="fas fa-check text-purple-500 mr-3"></i> 20 GB RAM</li>
+                    <li><i class="fas fa-database text-purple-500 mr-3"></i> 7 Managed Backups</li>
+                    <li><i class="fas fa-globe text-purple-500 mr-3"></i> Custom Domain</li>
+                </ul>
+                <button onclick="openModal('purchase-modal')" class="w-full py-5 rounded-2xl btn-premium font-black uppercase tracking-widest text-xs">Purchase</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ─── FOOTER ─── -->
+    <footer class="mt-16 border-t border-zinc-900/80 bg-black/50 py-20 px-6 backdrop-blur-xl reveal relative z-10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left">
+            <div>
+                <a href="#" class="logo-link mb-5 justify-center md:justify-start">
+                    <img src="ZQ_logo.png" alt="ZQ Logo" class="h-8 w-8 object-contain rounded-lg" onerror="this.style.display='none'" />
+                    <span class="brand text-xl font-black uppercase tracking-tight">ZQ<span class="text-purple-500">HOSTING</span></span>
+                </a>
+                <p class="text-zinc-500 text-sm max-w-xs leading-relaxed">Premium Minecraft hosting built for scale and speed across Asia.</p>
+                <p class="text-[10px] text-zinc-700 mt-5 font-bold uppercase tracking-widest">© 2026 ZQ Hosting · All Rights Reserved</p>
+            </div>
+            <div class="flex gap-14">
+                <div class="flex flex-col gap-3">
+                    <span class="text-white text-xs font-black uppercase tracking-widest" style="font-family: 'Plus Jakarta Sans', sans-serif;">Legal</span>
+                    <button onclick="openModal('privacy-modal')" class="text-zinc-500 text-sm hover:text-purple-400 transition text-left">Privacy Policy</button>
+                    <button onclick="openModal('tos-modal')" class="text-zinc-500 text-sm hover:text-purple-400 transition text-left">Terms of Service</button>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <span class="text-white text-xs font-black uppercase tracking-widest" style="font-family: 'Plus Jakarta Sans', sans-serif">Support</span>
+                    <a href="https://panel.zqhost.qzz.io/login" target="_blank" class="text-zinc-500 text-sm hover:text-purple-400 transition">Panel Login</a>
+                    <button onclick="openModal('kb-modal')" class="text-zinc-500 text-sm hover:text-purple-400 transition text-left">Documentation</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ══════════════════════════════════════════
+         MODALS
+    ══════════════════════════════════════════ -->
+
+    <!-- Purchase Modal -->
+    <div id="purchase-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="purchase-title">
+        <div class="modal-box text-center">
+            <button class="modal-close-btn" onclick="closeModal('purchase-modal')" aria-label="Close"><i class="fas fa-times text-sm"></i></button>
+            <div class="w-20 h-20 bg-purple-600/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fab fa-discord text-purple-400 text-4xl"></i>
+            </div>
+            <h2 id="purchase-title" class="text-2xl font-black mb-3" style="font-family: 'Plus Jakarta Sans', sans-serif">Manual Deployment</h2>
+            <p class="text-zinc-400 text-sm mb-8 leading-relaxed max-w-sm mx-auto">
+                To ensure the lowest possible ping on our Asian nodes and provide 1-on-1 hardware tuning, our engineers handle every deployment personally via Discord.
+            </p>
+            <div class="flex flex-col gap-4">
+                <a href="https://dsc.gg/zqhosting" target="_blank" class="btn-premium py-4 rounded-xl font-black uppercase tracking-widest text-xs block">
+                    <i class="fab fa-discord mr-2"></i>Claim Your Node on Discord
+                </a>
+                <button onclick="closeModal('purchase-modal')" class="py-4 text-zinc-500 font-bold hover:text-white transition text-sm">← Back to site</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div id="privacy-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
+        <div class="modal-box">
+            <button class="modal-close-btn" onclick="closeModal('privacy-modal')" aria-label="Close"><i class="fas fa-times text-sm"></i></button>
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-12 h-12 bg-purple-600/20 rounded-2xl flex items-center justify-center">
+                    <i class="fas fa-lock text-purple-400 text-lg"></i>
+                </div>
+                <div>
+                    <h2 id="privacy-title" class="text-2xl font-black" style="font-family: 'Plus Jakarta Sans', sans-serif">Privacy Policy</h2>
+                    <p class="text-xs text-zinc-500 mt-0.5">Effective: January 1, 2026</p>
+                </div>
+            </div>
+
+            <div class="space-y-6 text-sm text-zinc-400 leading-relaxed">
+                <div>
+                    <h3 class="text-white font-bold mb-2 text-base" style="font-family: 'Plus Jakarta Sans', sans-serif">1. What We Collect</h3>
+                    <p>When you purchase or use ZQ Hosting services, we may collect your Discord username, email address, payment details (processed securely via third-party providers), server configuration preferences, and IP address for DDoS mitigation purposes only.</p>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-2 text-base" style="font-family: 'Plus Jakarta Sans', sans-serif">2. How We Use Your Data</h3>
+                    <p>Your data is used exclusively to provision and maintain your server, communicate service updates, and resolve support tickets. We do not run ads. We do not sell your data. Ever.</p>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-2 text-base" style="font-family: 'Plus Jakarta Sans', sans-serif">3. Data Retention</h3>
+                    <p>Account data is retained for as long as your subscription is active. Upon cancellation, data is purged within 30 days unless legally required to retain it.</p>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-2 text-base" style="font-family: 'Plus Jakarta Sans', sans-serif">4. Third Parties</h3>
+                    <p>We use Pelican Panel for server management. No personal data is shared with advertisers or unrelated third parties. Payment processing is handled by trusted, PCI-compliant providers.</p>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-2 text-base" style="font-family: 'Plus Jakarta Sans', sans-serif">5. Your Rights</h3>
+                    <p>You may request access to, correction of, or deletion of your personal data at any time by contacting us on Discord. We will respond within 7 business days.</p>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-2 text-base" style="font-family: 'Plus Jakarta Sans', sans-serif">6. Contact</h3>
+                    <p>For any privacy concerns, reach us via our <a href="https://dsc.gg/zqhosting" target="_blank" class="text-purple-400 hover:underline">Discord server</a>.</p>
+                </div>
+            </div>
+
+            <button onclick="closeModal('privacy-modal')" class="mt-8 btn-premium px-8 py-3 rounded-xl font-bold uppercase text-xs w-full">Got it</button>
+        </div>
+    </div>
+
+    <!-- Terms of Service Modal -->
+    <div id="tos-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="tos-title">
+        <div class="modal-box">
+            <button class="modal-close-btn" onclick="closeModal('tos-modal')" aria-label="Close"><i class="fas fa-times text-sm"></i></button>
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-12 h-12 bg-purple-600/20 rounded-2xl flex items-center justify-center">
+                    <i class="fas fa-file-contract text-purple-400 text-lg"></i>
+                </div>
+                <div>
+                    <h2 id="tos-title" class="text-2xl font-black" style="font-family: 'Plus Jakarta Sans', sans-serif">Terms of Service</h2>
+                    <p class="text-xs text-zinc-500 mt-0.5">Effective: January 1, 2026</p>
+                </div>
+            </div>
+
+            <div class="space-y-6 text-sm text-zinc-400 leading-relaxed">
+                <div>
+                    <h3 class="text-white font-bold mb-2 text-base" style="font-family: 'Plus Jakarta Sans', sans-serif">1. Acceptance</h3>
+                    <p>By purchasing or using any ZQ Hosting service, you agree to these Terms of Service in full. If you do not agree, you must not use our services.</p>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-2 text-base" style="font-family: 'Plus Jakarta Sans', sans-serif">2. Prohibited Use</h3>
+                    <p>You may not use ZQ Hosting servers to conduct DDoS attacks, host illegal content, distribute malware, engage in cryptocurrency mining without prior written consent, or violate any applicable local, national, or international law.</p>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-2 text-base" style="font-family: 'Plus Jakarta Sans', sans-serif">3. Refund Policy</h3>
+                    <p>Refunds are considered on a case-by-case basis within 48 hours of purchase. After a server has been provisioned and access granted, refunds are not guaranteed. Contact our team on Discord to raise a dispute.</p>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-2 text-base" style="font-family: 'Plus Jakarta Sans', sans-serif">4. Uptime & SLA</h3>
+                    <p>We target 99.9% monthly uptime. Scheduled maintenance windows are announced at least 24 hours in advance via Discord. Downtime caused by DDoS attacks, force majeure, or user actions is excluded from SLA calculations.</p>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-2 text-base" style="font-family: 'Plus Jakarta Sans', sans-serif">5. Account Termination</h3>
+                    <p>ZQ Hosting reserves the right to suspend or terminate any account that violates these terms, without prior notice, at our sole discretion. No refund will be issued upon termination for violations.</p>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-2 text-base" style="font-family: 'Plus Jakarta Sans', sans-serif">6. Limitation of Liability</h3>
+                    <p>ZQ Hosting is not liable for data loss, game world corruption, or any indirect damages arising from the use of our services. Always maintain your own backups.</p>
+                </div>
+            </div>
+
+            <button onclick="closeModal('tos-modal')" class="mt-8 btn-premium px-8 py-3 rounded-xl font-bold uppercase text-xs w-full">I Understand</button>
+        </div>
+    </div>
+
+    <!-- Documentation Modal -->
+    <div id="kb-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="kb-title">
+        <div class="modal-box">
+            <button class="modal-close-btn" onclick="closeModal('kb-modal')" aria-label="Close"><i class="fas fa-times text-sm"></i></button>
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-12 h-12 bg-purple-600/20 rounded-2xl flex items-center justify-center">
+                    <i class="fas fa-book text-purple-400 text-lg"></i>
+                </div>
+                <div>
+                    <h2 id="kb-title" class="text-2xl font-black" style="font-family: 'Plus Jakarta Sans', sans-serif">Documentation</h2>
+                    <p class="text-xs text-zinc-500 mt-0.5">Quick-start guides &amp; resources</p>
+                </div>
+            </div>
+
+            <div class="space-y-1 mb-8">
+                <div class="docs-item">
+                    <div class="docs-icon"><i class="fas fa-play text-purple-400 text-sm"></i></div>
+                    <div>
+                        <div class="text-white font-bold text-sm mb-0.5">Getting Started</div>
+                        <div class="text-zinc-500 text-xs leading-relaxed">After purchase, our engineer will DM you on Discord to set up your node. Share your preferred server version and any plugins you need.</div>
+                    </div>
+                </div>
+                <div class="docs-item">
+                    <div class="docs-icon"><i class="fas fa-terminal text-purple-400 text-sm"></i></div>
+                    <div>
+                        <div class="text-white font-bold text-sm mb-0.5">Pelican Panel Access</div>
+                        <div class="text-zinc-500 text-xs leading-relaxed">Log in at <a href="https://panel.zqhost.qzz.io" target="_blank" class="text-purple-400 hover:underline">panel.zqhost.qzz.io</a> using the credentials provided by our team. From there you can manage files, view console, start/stop your server, and install mods.</div>
+                    </div>
+                </div>
+                <div class="docs-item">
+                    <div class="docs-icon"><i class="fas fa-database text-purple-400 text-sm"></i></div>
+                    <div>
+                        <div class="text-white font-bold text-sm mb-0.5">Backups</div>
+                        <div class="text-zinc-500 text-xs leading-relaxed">Managed backups are created automatically based on your plan. You can restore any backup directly from the Pelican Panel with one click.</div>
+                    </div>
+                </div>
+                <div class="docs-item">
+                    <div class="docs-icon"><i class="fas fa-plug text-purple-400 text-sm"></i></div>
+                    <div>
+                        <div class="text-white font-bold text-sm mb-0.5">Plugin Installation</div>
+                        <div class="text-zinc-500 text-xs leading-relaxed">Upload .jar plugin files to the <code class="bg-zinc-800 px-1 rounded text-purple-300">/plugins</code> folder via Pelican Panel's file manager and restart your server. Gold &amp; Diamond plans include a curated premium plugin pack.</div>
+                    </div>
+                </div>
+                <div class="docs-item">
+                    <div class="docs-icon"><i class="fas fa-headset text-purple-400 text-sm"></i></div>
+                    <div>
+                        <div class="text-white font-bold text-sm mb-0.5">Support</div>
+                        <div class="text-zinc-500 text-xs leading-relaxed">For any issues, open a ticket in our <a href="https://dsc.gg/zqhosting" target="_blank" class="text-purple-400 hover:underline">Discord server</a>. Our team responds typically within a few hours.</div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="https://dsc.gg/zqhosting" target="_blank" class="btn-premium py-3 rounded-xl font-bold uppercase text-xs block text-center">
+                <i class="fab fa-discord mr-2"></i>Get Help on Discord
+            </a>
+        </div>
+    </div>
+
+    <!-- ─── SCRIPTS ─── -->
+    <script>
+    /* ── CURSOR GLOW ── */
+    const glow = document.getElementById('cursor-glow');
+    document.addEventListener('mousemove', e => {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+        glow.style.opacity = '1';
+    });
+
+    /* ── BACK TO TOP ── */
+    window.addEventListener('scroll', () => {
+        const btn = document.getElementById('backToTop');
+        document.documentElement.scrollTop > 350 ? btn.classList.add('show') : btn.classList.remove('show');
+    });
+
+    /* ── SCROLL REVEAL ── */
+    const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.07 });
+
+    window.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.reveal, .stagger-children').forEach(el => revealObserver.observe(el));
+        animateStats();
+    });
+
+    /* ── MODAL SYSTEM ── */
+    let currentModal = null;
+
+    function openModal(id) {
+        if (currentModal) closeModal(currentModal);
+        const el = document.getElementById(id);
+        el.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        currentModal = id;
+    }
+
+    function closeModal(id) {
+        const el = document.getElementById(id);
+        el.classList.remove('open');
+        document.body.style.overflow = '';
+        currentModal = null;
+    }
+
+    // Close on backdrop click
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+        overlay.addEventListener('click', e => {
+            if (e.target === overlay) closeModal(overlay.id);
+        });
+    });
+
+    // ESC key closes modals
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && currentModal) closeModal(currentModal);
+    });
+
+    /* ── CARD MOUSE-TRACKING (glow follows cursor) ── */
+    document.querySelectorAll('.glass-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            card.style.setProperty('--mx', x + '%');
+            card.style.setProperty('--my', y + '%');
+        });
+    });
+
+    /* ── STAT COUNTER ANIMATION ── */
+    function animateStats() {
+        document.querySelectorAll('[data-count]').forEach(el => {
+            const target = parseFloat(el.dataset.count);
+            const suffix = el.dataset.suffix || '';
+            const decimals = String(target).includes('.') ? 1 : 0;
+            let start = null;
+            const duration = 1800;
+            const step = ts => {
+                if (!start) start = ts;
+                const prog = Math.min((ts - start) / duration, 1);
+                const ease = 1 - Math.pow(1 - prog, 4);
+                el.textContent = (target * ease).toFixed(decimals) + suffix;
+                if (prog < 1) requestAnimationFrame(step);
+            };
+            // Trigger when visible
+            const ob = new IntersectionObserver(([entry]) => {
+                if (entry.isIntersecting) { requestAnimationFrame(step); ob.disconnect(); }
+            }, { threshold: 0.5 });
+            ob.observe(el);
+        });
+    }
+
+    /* ── PARTICLE SYSTEM ── */
+    (function() {
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let W, H, particles = [];
+
+        function resize() {
+            W = canvas.width = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        function rand(a, b) { return Math.random() * (b - a) + a; }
+
+        function Particle() {
+            this.x = rand(0, W);
+            this.y = rand(0, H);
+            this.r = rand(0.5, 1.8);
+            this.vx = rand(-0.15, 0.15);
+            this.vy = rand(-0.3, -0.08);
+            this.alpha = rand(0.1, 0.5);
+            this.color = Math.random() > 0.6 ? '168,85,247' : '255,255,255';
+        }
+
+        for (let i = 0; i < 100; i++) particles.push(new Particle());
+
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${p.color},${p.alpha})`;
+                ctx.fill();
+                p.x += p.vx;
+                p.y += p.vy;
+                if (p.y < -5 || p.x < -5 || p.x > W + 5) {
+                    p.x = rand(0, W);
+                    p.y = H + 5;
+                }
+            });
+            requestAnimationFrame(draw);
+        }
+        draw();
+    })();
+
+    /* ── NAV SCROLL SHADE ── */
+    window.addEventListener('scroll', () => {
+        const nav = document.querySelector('nav');
+        nav.style.background = window.scrollY > 60
+            ? 'rgba(4,4,7,0.97)'
+            : 'rgba(4,4,7,0.75)';
+    });
+
+    /* ── BUTTON RIPPLE ── */
+    document.querySelectorAll('.btn-premium').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const r = document.createElement('span');
+            const size = Math.max(this.offsetWidth, this.offsetHeight);
+            const rect = this.getBoundingClientRect();
+            r.style.cssText = `
+                position:absolute;border-radius:50%;
+                width:${size}px;height:${size}px;
+                left:${e.clientX - rect.left - size/2}px;
+                top:${e.clientY - rect.top - size/2}px;
+                background:rgba(255,255,255,0.25);
+                transform:scale(0);pointer-events:none;
+                animation:ripple 0.55s ease-out forwards;
+            `;
+            if (!document.querySelector('#ripple-style')) {
+                const s = document.createElement('style');
+                s.id = 'ripple-style';
+                s.textContent = '@keyframes ripple{to{transform:scale(2.5);opacity:0}}';
+                document.head.appendChild(s);
+            }
+            this.style.position = 'relative';
+            this.appendChild(r);
+            setTimeout(() => r.remove(), 600);
+        });
+    });
+    </script>
+</body>
+</html>
