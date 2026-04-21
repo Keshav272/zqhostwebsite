@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZQ Hosting | Pricing & Plans</title>
+    <link rel="icon" type="image/png" href="ZQ_logo.png" />
+    <meta name="description" content="ZQ Hosting pricing plans — Standard, Pro, Premium with flexible add-ons. Minecraft server hosting starting from ₹179/month.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-deep:#040407; --card-base:rgba(12,12,18,0.75); --accent:#a855f7; --accent-glow:rgba(168,85,247,0.25); --border:rgba(255,255,255,0.07); }
+        html { scroll-behavior:smooth; }
+        *,*::before,*::after { box-sizing:border-box; }
+        body { background-color:var(--bg-deep); color:#fafafa; font-family:'Plus Jakarta Sans',sans-serif; overflow-x:hidden; }
+        h1,h2,h3,h4,.brand { font-family:'Plus Jakarta Sans',sans-serif; }
+        nav { background:rgba(4,4,7,0.75); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px); border-bottom:1px solid var(--border); transition:background 0.4s ease; }
+        .orb { position:fixed; border-radius:50%; filter:blur(120px); z-index:-1; opacity:0; animation:orbFloat 25s infinite alternate ease-in-out,orbFadeIn 2s forwards; }
+        .orb-1 { width:600px; height:600px; background:var(--accent); top:-15%; left:-12%; animation-delay:0s,0.3s; }
+        .orb-2 { width:450px; height:450px; background:#6366f1; bottom:-15%; right:-10%; animation-delay:-8s,0.6s; }
+        .orb-3 { width:300px; height:300px; background:#ec4899; top:40%; left:50%; animation-delay:-14s,0.9s; }
+        @keyframes orbFadeIn { to{opacity:0.12} }
+        @keyframes orbFloat { 0%{transform:translate(0,0) scale(1)} 33%{transform:translate(30px,-40px) scale(1.05)} 66%{transform:translate(-20px,20px) scale(0.97)} 100%{transform:translate(15px,-15px) scale(1.03)} }
+        #cursor-glow { position:fixed; width:600px; height:600px; background:radial-gradient(circle,rgba(168,85,247,0.1) 0%,transparent 65%); border-radius:50%; pointer-events:none; z-index:-1; transform:translate(-50%,-50%); transition:opacity 0.3s; }
+        #particle-canvas { position:fixed; inset:0; z-index:-1; pointer-events:none; }
+        .glass-card { background:var(--card-base); border:1px solid var(--border); backdrop-filter:blur(20px); position:relative; overflow:hidden; transition:transform 0.55s cubic-bezier(0.16,1,0.3,1),border-color 0.4s,box-shadow 0.4s; }
+        .glass-card.overflow-visible-badge { overflow:visible; }
+        .glass-card.overflow-visible-badge::after { border-radius:2.5rem; }
+        .glass-card::after { content:''; position:absolute; inset:0; background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(168,85,247,0.08),transparent 70%); opacity:0; transition:opacity 0.4s; pointer-events:none; }
+        .glass-card:hover::after { opacity:1; }
+        .glass-card:hover { border-color:rgba(168,85,247,0.5); box-shadow:0 0 50px rgba(168,85,247,0.15),0 30px 60px rgba(0,0,0,0.5); transform:translateY(-8px) scale(1.01); }
+        .premium-text { background:linear-gradient(110deg,#fff 20%,#a855f7 50%,#fff 80%); background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:textShimmer 4s linear infinite; }
+        @keyframes textShimmer { to{background-position:200% center} }
+        .btn-premium { background:var(--accent); box-shadow:0 0 24px rgba(168,85,247,0.4); transition:all 0.35s cubic-bezier(0.16,1,0.3,1); color:white; position:relative; overflow:hidden; z-index:10; }
+        .btn-premium::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,0.15) 0%,transparent 60%); opacity:0; transition:opacity 0.3s; }
+        .btn-premium:hover::before { opacity:1; }
+        .btn-premium:hover { transform:scale(1.06) translateY(-3px); box-shadow:0 0 40px rgba(168,85,247,0.6),0 12px 32px rgba(0,0,0,0.4); }
+        .reveal { opacity:0; transform:translateY(40px); transition:opacity 1s cubic-bezier(0.16,1,0.3,1),transform 1s cubic-bezier(0.16,1,0.3,1); }
+        .reveal.active { opacity:1; transform:translateY(0); }
+        .stagger-children > * { opacity:0; transform:translateY(30px); transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+        .stagger-children.active > *:nth-child(1){opacity:1;transform:translateY(0);transition-delay:0.05s}
+        .stagger-children.active > *:nth-child(2){opacity:1;transform:translateY(0);transition-delay:0.15s}
+        .stagger-children.active > *:nth-child(3){opacity:1;transform:translateY(0);transition-delay:0.25s}
+        .stagger-children.active > *:nth-child(4){opacity:1;transform:translateY(0);transition-delay:0.35s}
+        .stagger-children.active > *:nth-child(5){opacity:1;transform:translateY(0);transition-delay:0.45s}
+        @keyframes heroIn { from{opacity:0;transform:translateY(60px) scale(0.96)} to{opacity:1;transform:translateY(0) scale(1)} }
+        .fade-d1{animation:heroIn 1.2s cubic-bezier(0.16,1,0.3,1) 0.1s both}
+        .fade-d2{animation:heroIn 1.2s cubic-bezier(0.16,1,0.3,1) 0.25s both}
+        .fade-d3{animation:heroIn 1.2s cubic-bezier(0.16,1,0.3,1) 0.4s both}
+        @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+        .price-slashed { text-decoration:line-through; color:#3f3f46; font-size:1rem; font-weight:600; margin-right:6px; }
+        .divider { width:60px; height:3px; background:linear-gradient(90deg,var(--accent),transparent); border-radius:999px; }
+        .logo-link { display:flex; align-items:center; gap:10px; text-decoration:none; transition:opacity 0.2s; }
+        .logo-link:hover { opacity:0.85; }
+        .icon-ring { width:48px; height:48px; background:rgba(168,85,247,0.1); border:1px solid rgba(168,85,247,0.2); border-radius:14px; display:flex; align-items:center; justify-content:center; transition:all 0.4s; }
+        .glass-card:hover .icon-ring { background:rgba(168,85,247,0.25); box-shadow:0 0 24px rgba(168,85,247,0.4); transform:scale(1.1) rotate(5deg); }
+        ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#0a0a0f}::-webkit-scrollbar-thumb{background:rgba(168,85,247,0.4);border-radius:99px}
+        #scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#a855f7,#6366f1,#ec4899);z-index:1000;width:0%;transition:width 0.1s}
+        .grid-pattern{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;mask-image:radial-gradient(ellipse at center,black 0%,transparent 70%)}
+        .plan-popular-glow{box-shadow:0 0 60px rgba(168,85,247,0.2),0 0 120px rgba(168,85,247,0.08)}
+        /* Slots badge */
+        .slots-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);color:#f87171;font-size:10px;font-weight:800;padding:5px 12px;border-radius:999px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem}
+        .slots-badge::before{content:'';width:6px;height:6px;background:#f87171;border-radius:50%;animation:blink 1.2s ease-in-out infinite}
+        /* Currency switcher */
+        .currency-btn{padding:8px 16px;border-radius:10px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;transition:all 0.25s;cursor:pointer;border:1px solid var(--border);background:transparent;color:#71717a}
+        .currency-btn.active{background:var(--accent);border-color:var(--accent);color:white;box-shadow:0 0 16px rgba(168,85,247,0.4)}
+        .currency-btn:hover:not(.active){border-color:rgba(168,85,247,0.4);color:#a855f7}
+        /* Addon card */
+        .addon-card{background:rgba(12,12,18,0.6);border:1px solid var(--border);border-radius:20px;padding:20px 24px;display:flex;align-items:center;gap:16px;transition:all 0.4s cubic-bezier(0.16,1,0.3,1)}
+        .addon-card:hover{border-color:rgba(168,85,247,0.4);background:rgba(168,85,247,0.05);transform:translateX(6px)}
+        .addon-icon{width:44px;height:44px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+        /* Price display */
+        .price-display{transition:all 0.3s cubic-bezier(0.16,1,0.3,1)}
+        .price-change{animation:priceFlip 0.35s cubic-bezier(0.16,1,0.3,1)}
+        @keyframes priceFlip{0%{opacity:0;transform:translateY(-8px)}100%{opacity:1;transform:translateY(0)}}
+        /* Badge pulse */
+        .badge-pulse::before{content:'';display:inline-block;width:7px;height:7px;background:#4ade80;border-radius:50%;margin-right:8px;animation:blink 1.4s ease-in-out infinite}
+        #backToTop{position:fixed;bottom:32px;right:32px;width:52px;height:52px;background:var(--accent);border-radius:16px;display:flex;align-items:center;justify-content:center;color:white;cursor:pointer;z-index:100;opacity:0;transition:all 0.4s cubic-bezier(0.16,1,0.3,1);transform:translateY(30px) scale(0.8);box-shadow:0 8px 24px rgba(168,85,247,0.4)}
+        #backToTop.show{opacity:1;transform:translateY(0) scale(1)}
+        #backToTop:hover{transform:translateY(-4px) scale(1.1)}
+        /* modal */
+        .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity 0.35s ease}
+        .modal-overlay.open{opacity:1;pointer-events:all}
+        .modal-box{background:rgba(15,15,22,0.98);border:1px solid rgba(168,85,247,0.25);border-radius:2.5rem;padding:3rem;max-width:480px;width:100%;position:relative;transform:scale(0.88) translateY(30px);transition:transform 0.4s cubic-bezier(0.16,1,0.3,1)}
+        .modal-overlay.open .modal-box{transform:scale(1) translateY(0)}
+        .modal-close-btn{position:absolute;top:1.5rem;right:1.5rem;width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#71717a;transition:all 0.25s}
+        .modal-close-btn:hover{background:rgba(168,85,247,0.15);color:white;border-color:var(--accent)}
+    </style>
+</head>
+<body>
+    <div id="scroll-progress"></div>
+    <canvas id="particle-canvas"></canvas>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div id="cursor-glow"></div>
+    <div id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></div>
+
+    <nav class="fixed w-full top-0 flex items-center justify-between px-6 md:px-12 py-4 z-50">
+        <a href="index.html" class="logo-link">
+            <img src="ZQ_logo.png" alt="ZQ Logo" class="h-9 w-9 object-contain rounded-lg" onerror="this.style.display='none'" />
+            <span class="brand text-xl font-black tracking-tight uppercase">ZQ<span class="text-purple-500">Hosting</span></span>
+        </a>
+        <div class="hidden lg:flex gap-10 text-[11px] font-bold tracking-widest text-zinc-400">
+            <a href="index.html" class="hover:text-purple-400 transition">HOME</a>
+            <a href="pricing.html" class="text-purple-400 transition">PRICING</a>
+            <a href="index.html#features" class="hover:text-purple-400 transition">FEATURES</a>
+            <a href="https://dsc.gg/zqhosting" target="_blank" class="hover:text-purple-400 transition">SUPPORT</a>
+        </div>
+        <a href="https://panel.zqhost.qzz.io" target="_blank" class="btn-premium px-7 py-3 rounded-full text-xs font-black uppercase tracking-wider">
+            <i class="fas fa-ghost mr-2"></i>Client Panel
+        </a>
+    </nav>
+
+    <header class="relative pt-36 pb-16 px-6 text-center overflow-hidden">
+        <div class="grid-pattern"></div>
+        <div class="fade-d1 inline-flex items-center px-5 py-2 rounded-full border border-purple-500/20 bg-purple-500/10 text-purple-300 text-[11px] font-bold tracking-[0.2em] uppercase mb-8 backdrop-blur-md badge-pulse">
+            Simple, Transparent Pricing
+        </div>
+        <h1 class="fade-d2 text-5xl md:text-7xl font-black mb-6 tracking-tighter leading-[0.9]">
+            Plans Built for<br><span class="premium-text">Every Crafter.</span>
+        </h1>
+        <p class="fade-d3 text-zinc-400 text-lg max-w-xl mx-auto mb-10 font-light leading-relaxed">
+            Pick your plan, customize with add-ons, and go live in minutes. No hidden fees.
+        </p>
+
+        <div class="fade-d3 flex flex-wrap justify-center gap-2 mb-4" id="currency-switcher">
+            <button class="currency-btn active" onclick="setCurrency('INR')">₹ INR</button>
+            <button class="currency-btn" onclick="setCurrency('USD')">$ USD</button>
+            <button class="currency-btn" onclick="setCurrency('EUR')">€ EUR</button>
+            <button class="currency-btn" onclick="setCurrency('GBP')">£ GBP</button>
+            <button class="currency-btn" onclick="setCurrency('AED')">د.إ AED</button>
+            <button class="currency-btn" onclick="setCurrency('SGD')">S$ SGD</button>
+            <button class="currency-btn" onclick="setCurrency('AUD')">A$ AUD</button>
+        </div>
+        <p class="text-zinc-600 text-xs mb-2" id="currency-note">Showing prices in INR</p>
+    </header>
+
+    <section class="py-16 max-w-7xl mx-auto px-6 relative z-10">
+        <div class="grid lg:grid-cols-3 gap-8">
+            <div class="glass-card p-10 rounded-[2.5rem] flex flex-col h-full border-zinc-800">
+                <div class="slots-badge">Limited Slots</div>
+                <h3 class="text-zinc-500 font-bold uppercase tracking-widest text-xs mb-1">Standard Plan</h3>
+                <p class="text-zinc-600 text-xs mb-5 font-semibold">Vanilla Only · Up to 10–15 Players Recommended</p>
+                <div class="flex items-baseline mb-8">
+                    <span class="price-slashed price-orig-standard"></span>
+                    <span class="text-5xl font-black price-display" data-inr="179">₹179</span>
+                    <span class="text-zinc-500 text-sm font-normal">/month</span>
+                </div>
+                <ul class="space-y-4 text-zinc-400 mb-12 flex-grow text-sm">
+                    <li><i class="fas fa-check text-purple-500 mr-3"></i> 65% CPU</li>
+                    <li><i class="fas fa-check text-purple-500 mr-3"></i> 3 GB RAM</li>
+                    <li><i class="fas fa-folder text-purple-500 mr-3"></i> 10 GB NVMe SSD</li>
+                    <li><i class="fas fa-user-shield text-purple-500 mr-3"></i> Basic DDoS Protection</li>
+                    <li><i class="fas fa-terminal text-purple-500 mr-3"></i> Pelican UI Access</li>
+                    <li><i class="fas fa-database text-purple-500 mr-3"></i> 1 Managed Backup</li>
+                    <li><i class="fas fa-wifi text-purple-500 mr-3"></i> 99% Uptime</li>
+                </ul>
+                <button onclick="openModal('purchase-modal')" class="w-full py-5 rounded-2xl btn-premium font-black uppercase tracking-widest text-xs">Purchase</button>
+            </div>
+
+            <div class="glass-card overflow-visible-badge p-10 rounded-[2.5rem] flex flex-col h-full border-purple-500/50 scale-105 z-20 plan-popular-glow">
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-purple-600 text-[10px] font-black px-5 py-1.5 rounded-full uppercase tracking-tighter shadow-lg">Most Popular</div>
+                <div class="slots-badge">Limited Slots</div>
+                <h3 class="text-purple-400 font-bold uppercase tracking-widest text-xs mb-4">Pro Plan</h3>
+                <div class="flex items-baseline mb-8">
+                    <span class="price-slashed price-orig-pro"></span>
+                    <span class="text-6xl font-black price-display" data-inr="549">₹549</span>
+                    <span class="text-zinc-500 text-sm font-normal">/month</span>
+                </div>
+                <ul class="space-y-4 text-zinc-300 mb-12 flex-grow text-sm">
+                    <li><i class="fas fa-check text-purple-500 mr-3"></i> 125% CPU</li>
+                    <li><i class="fas fa-check text-purple-500 mr-3"></i> 6 GB RAM</li>
+                    <li><i class="fas fa-folder text-purple-500 mr-3"></i> 25 GB NVMe SSD</li>
+                    <li><i class="fas fa-user-shield text-purple-500 mr-3"></i> Advanced DDoS Protection</li>
+                    <li><i class="fas fa-database text-purple-500 mr-3"></i> 3 Managed Backups</li>
+                    <li><i class="fas fa-plug text-purple-500 mr-3"></i> Premium Plugins Kit Included</li>
+                    <li><i class="fas fa-wifi text-purple-500 mr-3"></i> 99% Uptime</li>
+                </ul>
+                <button onclick="openModal('purchase-modal')" class="w-full py-5 rounded-2xl btn-premium font-black uppercase tracking-widest text-xs">Purchase</button>
+            </div>
+
+            <div class="glass-card p-10 rounded-[2.5rem] flex flex-col h-full border-zinc-800">
+                <div class="slots-badge">Limited Slots</div>
+                <h3 class="text-zinc-500 font-bold uppercase tracking-widest text-xs mb-4">Premium Plan</h3>
+                <div class="flex items-baseline mb-8">
+                    <span class="price-slashed price-orig-premium"></span>
+                    <span class="text-5xl font-black price-display" data-inr="999">₹999</span>
+                    <span class="text-zinc-500 text-sm font-normal">/month</span>
+                </div>
+                <ul class="space-y-4 text-zinc-400 mb-12 flex-grow text-sm">
+                    <li><i class="fas fa-check text-purple-500 mr-3"></i> 185% CPU</li>
+                    <li><i class="fas fa-check text-purple-500 mr-3"></i> 12 GB RAM</li>
+                    <li><i class="fas fa-folder text-purple-500 mr-3"></i> 50 GB NVMe SSD</li>
+                    <li><i class="fas fa-user-shield text-purple-500 mr-3"></i> Advanced DDoS Protection</li>
+                    <li><i class="fas fa-database text-purple-500 mr-3"></i> 7 Managed Backups</li>
+                    <li><i class="fas fa-globe text-purple-500 mr-3"></i> Custom Domain</li>
+                    <li><i class="fas fa-wifi text-purple-500 mr-3"></i> 99% Uptime</li>
+                </ul>
+                <button onclick="openModal('purchase-modal')" class="w-full py-5 rounded-2xl btn-premium font-black uppercase tracking-widest text-xs">Purchase</button>
+            </div>
+        </div>
+        <p class="text-center text-zinc-600 text-xs mt-6" id="fx-note" style="display:none">* International prices are billed in INR equivalent at checkout. Shown price is approximate.</p>
+    </section>
+
+    <section class="py-20 max-w-5xl mx-auto px-6 relative z-10 reveal">
+        <div class="text-center mb-14">
+            <p class="text-purple-400 text-xs font-black tracking-[0.25em] uppercase mb-3">Customise</p>
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-4 premium-text">Power-Ups &amp; Add-ons</h2>
+            <p class="text-zinc-500 text-sm max-w-lg mx-auto">Bolt-on exactly what you need. All add-ons are billed monthly alongside your plan.</p>
+            <div class="divider mx-auto mt-5"></div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4 stagger-children reveal">
+            <div class="addon-card">
+                <div class="addon-icon"><i class="fas fa-memory text-purple-400"></i></div>
+                <div class="flex-1">
+                    <div class="font-bold text-sm mb-0.5">Extra RAM</div>
+                    <div class="text-zinc-500 text-xs">Boost performance for modpacks &amp; large player counts</div>
+                </div>
+                <div class="text-right flex-shrink-0">
+                    <div class="font-black text-lg addon-price" data-inr="99">₹99</div>
+                    <div class="text-zinc-600 text-[10px] font-semibold">per GB / mo</div>
+                </div>
+            </div>
+            <div class="addon-card">
+                <div class="addon-icon"><i class="fas fa-network-wired text-purple-400"></i></div>
+                <div class="flex-1">
+                    <div class="font-bold text-sm mb-0.5">Extra Port</div>
+                    <div class="text-zinc-500 text-xs">Run multiple services — proxy, dynmap, SFTP, etc.</div>
+                </div>
+                <div class="text-right flex-shrink-0">
+                    <div class="font-black text-lg addon-price" data-inr="69">₹69</div>
+                    <div class="text-zinc-600 text-[10px] font-semibold">per port / mo</div>
+                </div>
+            </div>
+            <div class="addon-card">
+                <div class="addon-icon"><i class="fas fa-hard-drive text-purple-400"></i></div>
+                <div class="flex-1">
+                    <div class="font-bold text-sm mb-0.5">Extra Storage</div>
+                    <div class="text-zinc-500 text-xs">More NVMe SSD space for large worlds &amp; mods</div>
+                </div>
+                <div class="text-right flex-shrink-0">
+                    <div class="font-black text-lg addon-price" data-inr="59">₹59</div>
+                    <div class="text-zinc-600 text-[10px] font-semibold">per GB / mo</div>
+                </div>
+            </div>
+            <div class="addon-card">
+                <div class="addon-icon"><i class="fas fa-globe text-purple-400"></i></div>
+                <div class="flex-1">
+                    <div class="font-bold text-sm mb-0.5">Custom Domain</div>
+                    <div class="text-zinc-500 text-xs">play.yourserver.com instead of a raw IP</div>
+                </div>
+                <div class="text-right flex-shrink-0">
+                    <div class="font-black text-lg addon-price" data-inr="150">₹150</div>
+                    <div class="text-zinc-600 text-[10px] font-semibold">per mo</div>
+                </div>
+            </div>
+            <div class="addon-card md:col-span-2">
+                <div class="addon-icon"><i class="fas fa-cloud-arrow-up text-purple-400"></i></div>
+                <div class="flex-1">
+                    <div class="font-bold text-sm mb-0.5">Additional Backups</div>
+                    <div class="text-zinc-500 text-xs">Extra managed snapshots beyond your plan's included count</div>
+                </div>
+                <div class="text-right flex-shrink-0">
+                    <div class="font-black text-lg addon-price" data-inr="49">₹49</div>
+                    <div class="text-zinc-600 text-[10px] font-semibold">per backup slot / mo</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-10 text-center">
+            <p class="text-zinc-500 text-sm mb-6">Want a custom configuration? Talk to us on Discord.</p>
+            <a href="https://dsc.gg/zqhosting" target="_blank" class="btn-premium px-10 py-4 rounded-2xl font-black uppercase tracking-widest text-sm inline-block">
+                <i class="fab fa-discord mr-2"></i>Chat with Our Team
+            </a>
+        </div>
+    </section>
+
+    <section class="py-20 max-w-3xl mx-auto px-6 relative z-10 reveal">
+        <div class="text-center mb-12">
+            <p class="text-purple-400 text-xs font-black tracking-[0.25em] uppercase mb-3">FAQ</p>
+            <h2 class="text-3xl font-extrabold premium-text mb-4">Common Questions</h2>
+            <div class="divider mx-auto"></div>
+        </div>
+        <div class="space-y-4" id="faq">
+            <div class="glass-card rounded-2xl overflow-hidden">
+                <button class="faq-q w-full text-left px-6 py-5 font-bold text-sm flex justify-between items-center" onclick="toggleFaq(this)">
+                    How do I purchase? <i class="fas fa-chevron-down text-purple-400 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-a hidden px-6 pb-5 text-zinc-400 text-sm leading-relaxed">Click Purchase on any plan and you'll be directed to our Discord server. Our engineers handle all deployments personally to ensure the best configuration for your needs.</div>
+            </div>
+            <div class="glass-card rounded-2xl overflow-hidden">
+                <button class="faq-q w-full text-left px-6 py-5 font-bold text-sm flex justify-between items-center" onclick="toggleFaq(this)">
+                    Can I upgrade my plan later? <i class="fas fa-chevron-down text-purple-400 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-a hidden px-6 pb-5 text-zinc-400 text-sm leading-relaxed">Yes! Reach out on Discord and we'll migrate your server to a higher tier with zero downtime. You only pay the difference.</div>
+            </div>
+            <div class="glass-card rounded-2xl overflow-hidden">
+                <button class="faq-q w-full text-left px-6 py-5 font-bold text-sm flex justify-between items-center" onclick="toggleFaq(this)">
+                    Why is the Standard plan Vanilla only? <i class="fas fa-chevron-down text-purple-400 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-a hidden px-6 pb-5 text-zinc-400 text-sm leading-relaxed">With 3GB RAM and 65% CPU, the Standard plan is optimised for a clean Vanilla experience with 10–15 players. Modpacks, Forge, or Fabric servers need more resources — upgrade to Pro or Premium for those.</div>
+            </div>
+            <div class="glass-card rounded-2xl overflow-hidden">
+                <button class="faq-q w-full text-left px-6 py-5 font-bold text-sm flex justify-between items-center" onclick="toggleFaq(this)">
+                    Are international prices accurate? <i class="fas fa-chevron-down text-purple-400 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-a hidden px-6 pb-5 text-zinc-400 text-sm leading-relaxed">International prices are approximations for convenience. Billing is processed in INR at checkout. Exchange rates may vary slightly.</div>
+            </div>
+            <div class="glass-card rounded-2xl overflow-hidden">
+                <button class="faq-q w-full text-left px-6 py-5 font-bold text-sm flex justify-between items-center" onclick="toggleFaq(this)">
+                    What payment methods do you accept? <i class="fas fa-chevron-down text-purple-400 transition-transform duration-300"></i>
+                </button>
+                <div class="faq-a hidden px-6 pb-5 text-zinc-400 text-sm leading-relaxed">We accept UPI, bank transfers, and other methods arranged directly via Discord. Contact our team for details.</div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="mt-8 border-t border-zinc-900/80 bg-black/50 py-16 px-6 backdrop-blur-xl reveal relative z-10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10 text-center md:text-left">
+            <div>
+                <a href="index.html" class="logo-link mb-4 justify-center md:justify-start">
+                    <img src="ZQ_logo.png" alt="ZQ Logo" class="h-8 w-8 object-contain rounded-lg" onerror="this.style.display='none'" />
+                    <span class="brand text-xl font-black uppercase tracking-tight">ZQ<span class="text-purple-500">HOSTING</span></span>
+                </a>
+                <p class="text-zinc-500 text-sm max-w-xs leading-relaxed">Premium Minecraft hosting built for scale and speed across Asia.</p>
+                <p class="text-[10px] text-zinc-700 mt-4 font-bold uppercase tracking-widest">© 2026 ZQ Hosting · All Rights Reserved</p>
+            </div>
+            <div class="flex gap-12">
+                <div class="flex flex-col gap-3">
+                    <span class="text-white text-xs font-black uppercase tracking-widest">Navigate</span>
+                    <a href="index.html" class="text-zinc-500 text-sm hover:text-purple-400 transition">Home</a>
+                    <a href="pricing.html" class="text-zinc-500 text-sm hover:text-purple-400 transition">Pricing</a>
+                    <a href="index.html#features" class="text-zinc-500 text-sm hover:text-purple-400 transition">Features</a>
+                </div>
+                <div class="flex flex-col gap-3">
+                    <span class="text-white text-xs font-black uppercase tracking-widest">Support</span>
+                    <a href="https://panel.zqhost.qzz.io/login" target="_blank" class="text-zinc-500 text-sm hover:text-purple-400 transition">Panel Login</a>
+                    <a href="https://dsc.gg/zqhosting" target="_blank" class="text-zinc-500 text-sm hover:text-purple-400 transition">Discord</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="purchase-modal" class="modal-overlay" role="dialog" aria-modal="true">
+        <div class="modal-box text-center">
+            <button class="modal-close-btn" onclick="closeModal('purchase-modal')"><i class="fas fa-times text-sm"></i></button>
+            <div class="w-20 h-20 bg-purple-600/20 rounded-full flex items-center justify-center mx-auto mb-6"><i class="fab fa-discord text-purple-400 text-4xl"></i></div>
+            <h2 class="text-2xl font-black mb-3">Manual Deployment</h2>
+            <p class="text-zinc-400 text-sm mb-8 leading-relaxed max-w-sm mx-auto">Our engineers handle every deployment personally via Discord to guarantee optimal performance on our Asian nodes.</p>
+            <div class="flex flex-col gap-4">
+                <a href="https://dsc.gg/zqhosting" target="_blank" class="btn-premium py-4 rounded-xl font-black uppercase tracking-widest text-xs block"><i class="fab fa-discord mr-2"></i>Claim Your Node on Discord</a>
+                <button onclick="closeModal('purchase-modal')" class="py-4 text-zinc-500 font-bold hover:text-white transition text-sm">← Back to site</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    /* ── CURRENCY DATA ── */
+    const CURRENCIES = {
+        INR: { sym:'₹', rate:1,    markup:1,    name:'Indian Rupee',       decimals:0, note:'Showing prices in INR' },
+        USD: { sym:'$', rate:83,   markup:1.32, name:'US Dollar',            decimals:2, note:'International prices shown at 30% premium. Billed in INR.' },
+        EUR: { sym:'€', rate:90,   markup:1.30, name:'Euro',                 decimals:2, note:'International prices shown at 30% premium. Billed in INR.' },
+        GBP: { sym:'£', rate:105,   markup:1.35, name:'British Pound',       decimals:2, note:'International prices shown at 35% premium. Billed in INR.' },
+        AED: { sym:'د.إ',rate:22.6, markup:1.28, name:'UAE Dirham',          decimals:1, note:'International prices shown at 28% premium. Billed in INR.' },
+        SGD: { sym:'S$',rate:62,    markup:1.30, name:'Singapore Dollar',    decimals:2, note:'International prices shown at 30% premium. Billed in INR.' },
+        AUD: { sym:'A$',rate:54,    markup:1.32, name:'Australian Dollar',   decimals:2, note:'International prices shown at 32% premium. Billed in INR.' },
+    };
+
+    const SLASHED_INR = { standard:800, pro:1500, premium:3000 };
+    let activeCurrency = 'INR';
+
+    function convertPrice(inrPrice, ccy) {
+        const c = CURRENCIES[ccy];
+        return ccy === 'INR' ? inrPrice : (inrPrice / c.rate) * c.markup;
+    }
+
+    function formatPrice(val, ccy) {
+        const c = CURRENCIES[ccy];
+        return ccy === 'INR' ? c.sym + Math.round(val) : c.sym + val.toFixed(c.decimals);
+    }
+
+    function setCurrency(ccy) {
+        activeCurrency = ccy;
+        const c = CURRENCIES[ccy];
+        document.querySelectorAll('.price-display').forEach(el => {
+            const inr = parseFloat(el.dataset.inr);
+            el.textContent = formatPrice(convertPrice(inr, ccy), ccy);
+            el.classList.remove('price-change'); void el.offsetWidth; el.classList.add('price-change');
+        });
+        document.querySelectorAll('.addon-price').forEach(el => {
+            el.textContent = formatPrice(convertPrice(parseFloat(el.dataset.inr), ccy), ccy);
+        });
+        ['standard','pro','premium'].forEach(k => {
+            const el = document.querySelector('.price-orig-'+k);
+            if (el) el.textContent = formatPrice(convertPrice(SLASHED_INR[k], ccy), ccy);
+        });
+        document.getElementById('currency-note').textContent = c.note;
+        document.getElementById('fx-note').style.display = ccy === 'INR' ? 'none' : 'block';
+        document.querySelectorAll('.currency-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.textContent.trim().includes(ccy) || btn.onclick.toString().includes("'"+ccy+"'"));
+        });
+    }
+
+    /* ── FAQ TOGGLE ── */
+    function toggleFaq(btn) {
+        const ans = btn.nextElementSibling;
+        const icon = btn.querySelector('i');
+        const isOpen = !ans.classList.contains('hidden');
+        document.querySelectorAll('.faq-a').forEach(a => a.classList.add('hidden'));
+        document.querySelectorAll('.faq-q i').forEach(i => i.style.transform = '');
+        if (!isOpen) {
+            ans.classList.remove('hidden');
+            icon.style.transform = 'rotate(180deg)';
+        }
+    }
+
+    /* ── UI HELPERS ── */
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelector('.price-orig-standard').textContent = '₹800';
+        document.querySelector('.price-orig-pro').textContent = '₹1500';
+        document.querySelector('.price-orig-premium').textContent = '₹3000';
+    });
+
+    const glow = document.getElementById('cursor-glow');
+    document.addEventListener('mousemove', e => { glow.style.left=e.clientX+'px'; glow.style.top=e.clientY+'px'; glow.style.opacity='1'; });
+
+    window.addEventListener('scroll', () => {
+        const el = document.documentElement;
+        document.getElementById('scroll-progress').style.width = (el.scrollTop/(el.scrollHeight-el.clientHeight)*100)+'%';
+        document.getElementById('backToTop').classList.toggle('show', el.scrollTop > 350);
+        document.querySelector('nav').style.background = el.scrollTop > 60 ? 'rgba(4,4,7,0.97)' : 'rgba(4,4,7,0.75)';
+    });
+
+    const ro = new IntersectionObserver(entries => {
+        entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('active');ro.unobserve(e.target);} });
+    }, {threshold:0.07});
+    window.addEventListener('DOMContentLoaded', () => document.querySelectorAll('.reveal,.stagger-children').forEach(el=>ro.observe(el)));
+
+    let currentModal=null;
+    function openModal(id){if(currentModal)closeModal(currentModal);document.getElementById(id).classList.add('open');document.body.style.overflow='hidden';currentModal=id;}
+    function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';currentModal=null;}
+    document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)closeModal(o.id);}));
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&currentModal)closeModal(currentModal);});
+
+    document.querySelectorAll('.glass-card').forEach(card=>{
+        card.addEventListener('mousemove',e=>{
+            const r=card.getBoundingClientRect();
+            card.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+            card.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
+        });
+    });
+
+    (function(){
+        const canvas=document.getElementById('particle-canvas'),ctx=canvas.getContext('2d');
+        let W,H,particles=[];
+        function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+        resize();window.addEventListener('resize',resize);
+        function rand(a,b){return Math.random()*(b-a)+a;}
+        function P(){this.x=rand(0,W);this.y=rand(0,H);this.r=rand(0.5,1.8);this.vx=rand(-0.15,0.15);this.vy=rand(-0.3,-0.08);this.alpha=rand(0.1,0.5);this.color=Math.random()>0.6?'168,85,247':'255,255,255';}
+        for(let i=0;i<100;i++)particles.push(new P());
+        function draw(){ctx.clearRect(0,0,W,H);particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(${p.color},${p.alpha})`;ctx.fill();p.x+=p.vx;p.y+=p.vy;if(p.y<-5||p.x<-5||p.x>W+5){p.x=rand(0,W);p.y=H+5;}});requestAnimationFrame(draw);}
+        draw();
+    })();
+
+    document.querySelectorAll('.btn-premium').forEach(btn=>{
+        btn.addEventListener('click',function(e){
+            const r=document.createElement('span'),size=Math.max(this.offsetWidth,this.offsetHeight),rect=this.getBoundingClientRect();
+            r.style.cssText=`position:absolute;border-radius:50%;width:${size}px;height:${size}px;left:${e.clientX-rect.left-size/2}px;top:${e.clientY-rect.top-size/2}px;background:rgba(255,255,255,0.25);transform:scale(0);pointer-events:none;animation:ripple 0.55s ease-out forwards;`;
+            if(!document.querySelector('#ripple-style')){const s=document.createElement('style');s.id='ripple-style';s.textContent='@keyframes ripple{to{transform:scale(2.5);opacity:0}}';document.head.appendChild(s);}
+            this.style.position='relative';this.appendChild(r);setTimeout(()=>r.remove(),600);
+        });
+    });
+    </script>
+</body>
+</html>
