@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZQ Hosting | Pricing & Plans</title>
     <link rel="icon" type="image/png" href="ZQ_logo.png" />
-    <meta name="description" content="ZQ Hosting pricing plans — Standard, Pro, Premium with flexible add-ons. Minecraft server hosting starting from ₹179/month.">
+    <meta name="description" content="ZQ Hosting pricing plans — Standard, Pro, Premium with flexible add-ons. Minecraft server hosting starting from ₹199/month.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
@@ -59,33 +59,34 @@
         #scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#a855f7,#6366f1,#ec4899);z-index:1000;width:0%;transition:width 0.1s}
         .grid-pattern{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;mask-image:radial-gradient(ellipse at center,black 0%,transparent 70%)}
         .plan-popular-glow{box-shadow:0 0 60px rgba(168,85,247,0.2),0 0 120px rgba(168,85,247,0.08)}
-        /* Slots badge */
         .slots-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);color:#f87171;font-size:10px;font-weight:800;padding:5px 12px;border-radius:999px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem}
         .slots-badge::before{content:'';width:6px;height:6px;background:#f87171;border-radius:50%;animation:blink 1.2s ease-in-out infinite}
-        /* Currency switcher */
         .currency-btn{padding:8px 16px;border-radius:10px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;transition:all 0.25s;cursor:pointer;border:1px solid var(--border);background:transparent;color:#71717a}
         .currency-btn.active{background:var(--accent);border-color:var(--accent);color:white;box-shadow:0 0 16px rgba(168,85,247,0.4)}
         .currency-btn:hover:not(.active){border-color:rgba(168,85,247,0.4);color:#a855f7}
-        /* Addon card */
         .addon-card{background:rgba(12,12,18,0.6);border:1px solid var(--border);border-radius:20px;padding:20px 24px;display:flex;align-items:center;gap:16px;transition:all 0.4s cubic-bezier(0.16,1,0.3,1)}
         .addon-card:hover{border-color:rgba(168,85,247,0.4);background:rgba(168,85,247,0.05);transform:translateX(6px)}
         .addon-icon{width:44px;height:44px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-        /* Price display */
         .price-display{transition:all 0.3s cubic-bezier(0.16,1,0.3,1)}
         .price-change{animation:priceFlip 0.35s cubic-bezier(0.16,1,0.3,1)}
         @keyframes priceFlip{0%{opacity:0;transform:translateY(-8px)}100%{opacity:1;transform:translateY(0)}}
-        /* Badge pulse */
         .badge-pulse::before{content:'';display:inline-block;width:7px;height:7px;background:#4ade80;border-radius:50%;margin-right:8px;animation:blink 1.4s ease-in-out infinite}
         #backToTop{position:fixed;bottom:32px;right:32px;width:52px;height:52px;background:var(--accent);border-radius:16px;display:flex;align-items:center;justify-content:center;color:white;cursor:pointer;z-index:100;opacity:0;transition:all 0.4s cubic-bezier(0.16,1,0.3,1);transform:translateY(30px) scale(0.8);box-shadow:0 8px 24px rgba(168,85,247,0.4)}
         #backToTop.show{opacity:1;transform:translateY(0) scale(1)}
         #backToTop:hover{transform:translateY(-4px) scale(1.1)}
-        /* modal */
         .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity 0.35s ease}
         .modal-overlay.open{opacity:1;pointer-events:all}
         .modal-box{background:rgba(15,15,22,0.98);border:1px solid rgba(168,85,247,0.25);border-radius:2.5rem;padding:3rem;max-width:480px;width:100%;position:relative;transform:scale(0.88) translateY(30px);transition:transform 0.4s cubic-bezier(0.16,1,0.3,1)}
         .modal-overlay.open .modal-box{transform:scale(1) translateY(0)}
         .modal-close-btn{position:absolute;top:1.5rem;right:1.5rem;width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#71717a;transition:all 0.25s}
         .modal-close-btn:hover{background:rgba(168,85,247,0.15);color:white;border-color:var(--accent)}
+        .dur-btn{padding:7px 14px;border-radius:8px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;transition:all 0.2s;cursor:pointer;border:1px solid var(--border);background:transparent;color:#71717a;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
+        .dur-btn.active{background:rgba(168,85,247,0.15);border-color:rgba(168,85,247,0.5);color:#c084fc}
+        .dur-btn:hover:not(.active){border-color:rgba(168,85,247,0.3);color:#a855f7}
+        .per-day-note{font-size:11px;color:#52525b;font-weight:600}
+        .savings-tag{display:inline-flex;align-items:center;gap:4px;background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.2);color:#4ade80;font-size:9px;font-weight:800;padding:3px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:0.08em}
+        .best-value-tag{display:inline-flex;align-items:center;background:rgba(250,204,21,0.1);border:1px solid rgba(250,204,21,0.2);color:#fbbf24;font-size:9px;font-weight:800;padding:3px 9px;border-radius:999px;text-transform:uppercase;letter-spacing:0.08em}
+        .flexible-tag{display:inline-flex;align-items:center;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);color:#818cf8;font-size:9px;font-weight:800;padding:3px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:0.08em}
     </style>
 </head>
 <body>
@@ -126,11 +127,11 @@
         </p>
 
         <div class="fade-d3 flex flex-wrap justify-center gap-2 mb-4" id="currency-switcher">
-            <button class="currency-btn active" onclick="setCurrency('INR')">₹ INR</button>
+            <button class="currency-btn active" onclick="setCurrency('INR')">&#8377; INR</button>
             <button class="currency-btn" onclick="setCurrency('USD')">$ USD</button>
-            <button class="currency-btn" onclick="setCurrency('EUR')">€ EUR</button>
-            <button class="currency-btn" onclick="setCurrency('GBP')">£ GBP</button>
-            <button class="currency-btn" onclick="setCurrency('AED')">د.إ AED</button>
+            <button class="currency-btn" onclick="setCurrency('EUR')">&euro; EUR</button>
+            <button class="currency-btn" onclick="setCurrency('GBP')">&pound; GBP</button>
+            <button class="currency-btn" onclick="setCurrency('AED')">&#1583;.&#1573; AED</button>
             <button class="currency-btn" onclick="setCurrency('SGD')">S$ SGD</button>
             <button class="currency-btn" onclick="setCurrency('AUD')">A$ AUD</button>
         </div>
@@ -138,15 +139,28 @@
     </header>
 
     <section class="py-16 max-w-7xl mx-auto px-6 relative z-10">
+        <div class="flex flex-wrap justify-center gap-2 mb-10" id="duration-switcher">
+            <button class="dur-btn" data-dur="1w" onclick="setDuration('1w')">1 Week <span class="flexible-tag">Flexible</span></button>
+            <button class="dur-btn" data-dur="2w" onclick="setDuration('2w')">2 Weeks <span class="flexible-tag">Flexible</span></button>
+            <button class="dur-btn active" data-dur="mo" onclick="setDuration('mo')">Monthly</button>
+            <button class="dur-btn" data-dur="3mo" onclick="setDuration('3mo')">Quarterly</button>
+            <button class="dur-btn" data-dur="6mo" onclick="setDuration('6mo')">6 Months</button>
+            <button class="dur-btn" data-dur="yr" onclick="setDuration('yr')">Yearly <span class="best-value-tag">Best Value</span></button>
+        </div>
+
         <div class="grid lg:grid-cols-3 gap-8">
             <div class="glass-card p-10 rounded-[2.5rem] flex flex-col h-full border-zinc-800">
                 <div class="slots-badge">Limited Slots</div>
                 <h3 class="text-zinc-500 font-bold uppercase tracking-widest text-xs mb-1">Standard Plan</h3>
-                <p class="text-zinc-600 text-xs mb-5 font-semibold">Vanilla and Up to 10–15 Players Recommended</p>
-                <div class="flex items-baseline mb-8">
+                <p class="text-zinc-600 text-xs mb-5 font-semibold">Vanilla and Up to 10&ndash;15 Players Recommended</p>
+                <div class="flex items-baseline mb-1">
                     <span class="price-slashed price-orig-standard"></span>
-                    <span class="text-5xl font-black price-display" data-inr="179">₹179</span>
-                    <span class="text-zinc-500 text-sm font-normal">/month</span>
+                    <span class="text-5xl font-black price-display" id="price-standard">&#8377;199</span>
+                    <span class="text-zinc-500 text-sm font-normal" id="period-standard">/month</span>
+                </div>
+                <div class="flex items-center gap-2 mb-7 flex-wrap">
+                    <span class="per-day-note" id="perday-standard"></span>
+                    <span class="savings-tag" id="savings-standard" style="display:none"></span>
                 </div>
                 <ul class="space-y-4 text-zinc-400 mb-12 flex-grow text-sm">
                     <li><i class="fas fa-check text-purple-500 mr-3"></i> 65% CPU</li>
@@ -164,10 +178,14 @@
                 <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-purple-600 text-[10px] font-black px-5 py-1.5 rounded-full uppercase tracking-tighter shadow-lg">Most Popular</div>
                 <div class="slots-badge">Limited Slots</div>
                 <h3 class="text-purple-400 font-bold uppercase tracking-widest text-xs mb-4">Pro Plan</h3>
-                <div class="flex items-baseline mb-8">
+                <div class="flex items-baseline mb-1">
                     <span class="price-slashed price-orig-pro"></span>
-                    <span class="text-6xl font-black price-display" data-inr="549">₹549</span>
-                    <span class="text-zinc-500 text-sm font-normal">/month</span>
+                    <span class="text-6xl font-black price-display" id="price-pro">&#8377;549</span>
+                    <span class="text-zinc-500 text-sm font-normal" id="period-pro">/month</span>
+                </div>
+                <div class="flex items-center gap-2 mb-7 flex-wrap">
+                    <span class="per-day-note" id="perday-pro"></span>
+                    <span class="savings-tag" id="savings-pro" style="display:none"></span>
                 </div>
                 <ul class="space-y-4 text-zinc-300 mb-12 flex-grow text-sm">
                     <li><i class="fas fa-check text-purple-500 mr-3"></i> 125% CPU</li>
@@ -184,10 +202,14 @@
             <div class="glass-card p-10 rounded-[2.5rem] flex flex-col h-full border-zinc-800">
                 <div class="slots-badge">Limited Slots</div>
                 <h3 class="text-zinc-500 font-bold uppercase tracking-widest text-xs mb-4">Premium Plan</h3>
-                <div class="flex items-baseline mb-8">
+                <div class="flex items-baseline mb-1">
                     <span class="price-slashed price-orig-premium"></span>
-                    <span class="text-5xl font-black price-display" data-inr="999">₹999</span>
-                    <span class="text-zinc-500 text-sm font-normal">/month</span>
+                    <span class="text-5xl font-black price-display" id="price-premium">&#8377;949</span>
+                    <span class="text-zinc-500 text-sm font-normal" id="period-premium">/month</span>
+                </div>
+                <div class="flex items-center gap-2 mb-7 flex-wrap">
+                    <span class="per-day-note" id="perday-premium"></span>
+                    <span class="savings-tag" id="savings-premium" style="display:none"></span>
                 </div>
                 <ul class="space-y-4 text-zinc-400 mb-12 flex-grow text-sm">
                     <li><i class="fas fa-check text-purple-500 mr-3"></i> 185% CPU</li>
@@ -220,7 +242,7 @@
                     <div class="text-zinc-500 text-xs">Boost performance for modpacks &amp; large player counts</div>
                 </div>
                 <div class="text-right flex-shrink-0">
-                    <div class="font-black text-lg addon-price" data-inr="99">₹99</div>
+                    <div class="font-black text-lg addon-price" data-inr="99">&#8377;99</div>
                     <div class="text-zinc-600 text-[10px] font-semibold">per GB / mo</div>
                 </div>
             </div>
@@ -228,10 +250,10 @@
                 <div class="addon-icon"><i class="fas fa-network-wired text-purple-400"></i></div>
                 <div class="flex-1">
                     <div class="font-bold text-sm mb-0.5">Extra Port</div>
-                    <div class="text-zinc-500 text-xs">Run multiple services — proxy, dynmap, SFTP, etc.</div>
+                    <div class="text-zinc-500 text-xs">Run multiple services &mdash; proxy, dynmap, SFTP, etc.</div>
                 </div>
                 <div class="text-right flex-shrink-0">
-                    <div class="font-black text-lg addon-price" data-inr="69">₹69</div>
+                    <div class="font-black text-lg addon-price" data-inr="69">&#8377;69</div>
                     <div class="text-zinc-600 text-[10px] font-semibold">per port / mo</div>
                 </div>
             </div>
@@ -242,7 +264,7 @@
                     <div class="text-zinc-500 text-xs">More NVMe SSD space for large worlds &amp; mods</div>
                 </div>
                 <div class="text-right flex-shrink-0">
-                    <div class="font-black text-lg addon-price" data-inr="59">₹59</div>
+                    <div class="font-black text-lg addon-price" data-inr="59">&#8377;59</div>
                     <div class="text-zinc-600 text-[10px] font-semibold">per GB / mo</div>
                 </div>
             </div>
@@ -253,7 +275,7 @@
                     <div class="text-zinc-500 text-xs">play.yourserver.com instead of a raw IP</div>
                 </div>
                 <div class="text-right flex-shrink-0">
-                    <div class="font-black text-lg addon-price" data-inr="150">₹150</div>
+                    <div class="font-black text-lg addon-price" data-inr="150">&#8377;150</div>
                     <div class="text-zinc-600 text-[10px] font-semibold">per mo</div>
                 </div>
             </div>
@@ -264,7 +286,7 @@
                     <div class="text-zinc-500 text-xs">Extra managed snapshots beyond your plan's included count</div>
                 </div>
                 <div class="text-right flex-shrink-0">
-                    <div class="font-black text-lg addon-price" data-inr="49">₹49</div>
+                    <div class="font-black text-lg addon-price" data-inr="49">&#8377;49</div>
                     <div class="text-zinc-600 text-[10px] font-semibold">per backup slot / mo</div>
                 </div>
             </div>
@@ -301,7 +323,7 @@
                 <button class="faq-q w-full text-left px-6 py-5 font-bold text-sm flex justify-between items-center" onclick="toggleFaq(this)">
                     Why is the Standard plan Vanilla recommended? <i class="fas fa-chevron-down text-purple-400 transition-transform duration-300"></i>
                 </button>
-                <div class="faq-a hidden px-6 pb-5 text-zinc-400 text-sm leading-relaxed">With 3GB RAM and 65% CPU, the Standard plan is optimised for a clean Vanilla experience with 10–15 players. Modpacks, Forge, or Fabric servers may require more resources — upgrade to Pro or Premium for those.</div>
+                <div class="faq-a hidden px-6 pb-5 text-zinc-400 text-sm leading-relaxed">With 3GB RAM and 65% CPU, the Standard plan is optimised for a clean Vanilla experience with 10&ndash;15 players. Modpacks, Forge, or Fabric servers may require more resources &mdash; upgrade to Pro or Premium for those.</div>
             </div>
             <div class="glass-card rounded-2xl overflow-hidden">
                 <button class="faq-q w-full text-left px-6 py-5 font-bold text-sm flex justify-between items-center" onclick="toggleFaq(this)">
@@ -326,7 +348,7 @@
                     <span class="brand text-xl font-black uppercase tracking-tight">ZQ<span class="text-purple-500">HOSTING</span></span>
                 </a>
                 <p class="text-zinc-500 text-sm max-w-xs leading-relaxed">Premium Minecraft hosting built for scale and speed across Asia.</p>
-                <p class="text-[10px] text-zinc-700 mt-4 font-bold uppercase tracking-widest">© 2026 ZQ Hosting · All Rights Reserved</p>
+                <p class="text-[10px] text-zinc-700 mt-4 font-bold uppercase tracking-widest">&copy; 2026 ZQ Hosting &middot; All Rights Reserved</p>
             </div>
             <div class="flex gap-12">
                 <div class="flex flex-col gap-3">
@@ -352,25 +374,41 @@
             <p class="text-zinc-400 text-sm mb-8 leading-relaxed max-w-sm mx-auto">Our engineers handle every deployment personally via Discord to guarantee optimal performance on our Asian nodes.</p>
             <div class="flex flex-col gap-4">
                 <a href="https://dsc.gg/zqhosting" target="_blank" class="btn-premium py-4 rounded-xl font-black uppercase tracking-widest text-xs block"><i class="fab fa-discord mr-2"></i>Claim Your Node on Discord</a>
-                <button onclick="closeModal('purchase-modal')" class="py-4 text-zinc-500 font-bold hover:text-white transition text-sm">← Back to site</button>
+                <button onclick="closeModal('purchase-modal')" class="py-4 text-zinc-500 font-bold hover:text-white transition text-sm">&larr; Back to site</button>
             </div>
         </div>
     </div>
 
     <script>
-    /* ── CURRENCY DATA ── */
     const CURRENCIES = {
-        INR: { sym:'₹', rate:1,    markup:1,    name:'Indian Rupee',       decimals:0, note:'Showing prices in INR' },
-        USD: { sym:'$', rate:83,   markup:1.32, name:'US Dollar',            decimals:2, note:'International prices shown at 30% premium. Billed in INR.' },
-        EUR: { sym:'€', rate:90,   markup:1.30, name:'Euro',                 decimals:2, note:'International prices shown at 30% premium. Billed in INR.' },
-        GBP: { sym:'£', rate:105,   markup:1.35, name:'British Pound',       decimals:2, note:'International prices shown at 35% premium. Billed in INR.' },
-        AED: { sym:'د.إ',rate:22.6, markup:1.28, name:'UAE Dirham',          decimals:1, note:'International prices shown at 28% premium. Billed in INR.' },
-        SGD: { sym:'S$',rate:62,    markup:1.30, name:'Singapore Dollar',    decimals:2, note:'International prices shown at 30% premium. Billed in INR.' },
-        AUD: { sym:'A$',rate:54,    markup:1.32, name:'Australian Dollar',   decimals:2, note:'International prices shown at 32% premium. Billed in INR.' },
+        INR: { sym:'\u20B9', rate:1,    markup:1,    decimals:0, note:'Showing prices in INR' },
+        USD: { sym:'$',      rate:83,   markup:1.32, decimals:2, note:'International prices shown at 30% premium. Billed in INR.' },
+        EUR: { sym:'\u20AC', rate:90,   markup:1.30, decimals:2, note:'International prices shown at 30% premium. Billed in INR.' },
+        GBP: { sym:'\u00A3', rate:105,  markup:1.35, decimals:2, note:'International prices shown at 35% premium. Billed in INR.' },
+        AED: { sym:'\u062F.\u0625', rate:22.6, markup:1.28, decimals:1, note:'International prices shown at 28% premium. Billed in INR.' },
+        SGD: { sym:'S$',     rate:62,   markup:1.30, decimals:2, note:'International prices shown at 30% premium. Billed in INR.' },
+        AUD: { sym:'A$',     rate:54,   markup:1.32, decimals:2, note:'International prices shown at 32% premium. Billed in INR.' },
+    };
+
+    const PLANS_INR = {
+        standard: { '1w':69,  '2w':129, 'mo':199, '3mo':549,  '6mo':999,  'yr':1799 },
+        pro:      { '1w':159, '2w':299, 'mo':549, '3mo':1499, '6mo':2799, 'yr':4999 },
+        premium:  { '1w':279, '2w':499, 'mo':949, '3mo':2599, '6mo':4799, 'yr':8499 },
+    };
+
+    const DURATIONS = {
+        '1w':  { days:7,   label:'/week' },
+        '2w':  { days:14,  label:'/2 weeks' },
+        'mo':  { days:30,  label:'/month' },
+        '3mo': { days:91,  label:'/quarter' },
+        '6mo': { days:182, label:'/6 months' },
+        'yr':  { days:365, label:'/year' },
     };
 
     const SLASHED_INR = { standard:800, pro:1500, premium:3000 };
+
     let activeCurrency = 'INR';
+    let activeDuration = 'mo';
 
     function convertPrice(inrPrice, ccy) {
         const c = CURRENCIES[ccy];
@@ -382,95 +420,173 @@
         return ccy === 'INR' ? c.sym + Math.round(val) : c.sym + val.toFixed(c.decimals);
     }
 
-    function setCurrency(ccy) {
-        activeCurrency = ccy;
-        const c = CURRENCIES[ccy];
-        document.querySelectorAll('.price-display').forEach(el => {
-            const inr = parseFloat(el.dataset.inr);
-            el.textContent = formatPrice(convertPrice(inr, ccy), ccy);
-            el.classList.remove('price-change'); void el.offsetWidth; el.classList.add('price-change');
+    function updatePricing() {
+        const ccy = activeCurrency;
+        const dur = activeDuration;
+        const durMeta = DURATIONS[dur];
+
+        ['standard','pro','premium'].forEach(function(plan) {
+            var inrPrice = PLANS_INR[plan][dur];
+            var converted = convertPrice(inrPrice, ccy);
+            var formatted = formatPrice(converted, ccy);
+
+            var priceEl = document.getElementById('price-' + plan);
+            var periodEl = document.getElementById('period-' + plan);
+            var perdayEl = document.getElementById('perday-' + plan);
+            var savingsEl = document.getElementById('savings-' + plan);
+
+            if (priceEl) {
+                priceEl.textContent = formatted;
+                priceEl.classList.remove('price-change');
+                void priceEl.offsetWidth;
+                priceEl.classList.add('price-change');
+            }
+            if (periodEl) periodEl.textContent = durMeta.label;
+
+            if (perdayEl) {
+                var perDayInr = inrPrice / durMeta.days;
+                perdayEl.textContent = '\u2248 ' + formatPrice(convertPrice(perDayInr, ccy), ccy) + '/day';
+            }
+
+            if (savingsEl) {
+                var moInr = PLANS_INR[plan]['mo'];
+                var moEquivTotal = (moInr / 30) * durMeta.days;
+                if (dur !== '1w' && dur !== '2w' && dur !== 'mo' && inrPrice < moEquivTotal) {
+                    var pct = Math.round(((moEquivTotal - inrPrice) / moEquivTotal) * 100);
+                    savingsEl.textContent = 'Save ' + pct + '%';
+                    savingsEl.style.display = 'inline-flex';
+                } else {
+                    savingsEl.style.display = 'none';
+                }
+            }
         });
-        document.querySelectorAll('.addon-price').forEach(el => {
+
+        document.querySelectorAll('.addon-price').forEach(function(el) {
             el.textContent = formatPrice(convertPrice(parseFloat(el.dataset.inr), ccy), ccy);
         });
-        ['standard','pro','premium'].forEach(k => {
-            const el = document.querySelector('.price-orig-'+k);
+
+        ['standard','pro','premium'].forEach(function(k) {
+            var el = document.querySelector('.price-orig-' + k);
             if (el) el.textContent = formatPrice(convertPrice(SLASHED_INR[k], ccy), ccy);
         });
-        document.getElementById('currency-note').textContent = c.note;
+
+        document.getElementById('currency-note').textContent = CURRENCIES[ccy].note;
         document.getElementById('fx-note').style.display = ccy === 'INR' ? 'none' : 'block';
-        document.querySelectorAll('.currency-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.textContent.trim().includes(ccy) || btn.onclick.toString().includes("'"+ccy+"'"));
+
+        document.querySelectorAll('.currency-btn').forEach(function(btn) {
+            var fnStr = btn.getAttribute('onclick') || '';
+            btn.classList.toggle('active', fnStr.indexOf("'" + ccy + "'") !== -1);
         });
     }
 
-    /* ── FAQ TOGGLE ── */
+    function setCurrency(ccy) {
+        activeCurrency = ccy;
+        updatePricing();
+    }
+
+    function setDuration(dur) {
+        activeDuration = dur;
+        document.querySelectorAll('.dur-btn').forEach(function(btn) {
+            btn.classList.toggle('active', btn.dataset.dur === dur);
+        });
+        updatePricing();
+    }
+
     function toggleFaq(btn) {
-        const ans = btn.nextElementSibling;
-        const icon = btn.querySelector('i');
-        const isOpen = !ans.classList.contains('hidden');
-        document.querySelectorAll('.faq-a').forEach(a => a.classList.add('hidden'));
-        document.querySelectorAll('.faq-q i').forEach(i => i.style.transform = '');
+        var ans = btn.nextElementSibling;
+        var icon = btn.querySelector('i');
+        var isOpen = !ans.classList.contains('hidden');
+        document.querySelectorAll('.faq-a').forEach(function(a) { a.classList.add('hidden'); });
+        document.querySelectorAll('.faq-q i').forEach(function(i) { i.style.transform = ''; });
         if (!isOpen) {
             ans.classList.remove('hidden');
             icon.style.transform = 'rotate(180deg)';
         }
     }
 
-    /* ── UI HELPERS ── */
-    document.addEventListener('DOMContentLoaded', () => {
-        document.querySelector('.price-orig-standard').textContent = '₹800';
-        document.querySelector('.price-orig-pro').textContent = '₹1500';
-        document.querySelector('.price-orig-premium').textContent = '₹3000';
+    document.addEventListener('DOMContentLoaded', function() {
+        updatePricing();
+        document.querySelectorAll('.reveal,.stagger-children').forEach(function(el) { ro.observe(el); });
     });
 
-    const glow = document.getElementById('cursor-glow');
-    document.addEventListener('mousemove', e => { glow.style.left=e.clientX+'px'; glow.style.top=e.clientY+'px'; glow.style.opacity='1'; });
+    var glow = document.getElementById('cursor-glow');
+    document.addEventListener('mousemove', function(e) {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+        glow.style.opacity = '1';
+    });
 
-    window.addEventListener('scroll', () => {
-        const el = document.documentElement;
-        document.getElementById('scroll-progress').style.width = (el.scrollTop/(el.scrollHeight-el.clientHeight)*100)+'%';
+    window.addEventListener('scroll', function() {
+        var el = document.documentElement;
+        document.getElementById('scroll-progress').style.width = (el.scrollTop / (el.scrollHeight - el.clientHeight) * 100) + '%';
         document.getElementById('backToTop').classList.toggle('show', el.scrollTop > 350);
         document.querySelector('nav').style.background = el.scrollTop > 60 ? 'rgba(4,4,7,0.97)' : 'rgba(4,4,7,0.75)';
     });
 
-    const ro = new IntersectionObserver(entries => {
-        entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('active');ro.unobserve(e.target);} });
-    }, {threshold:0.07});
-    window.addEventListener('DOMContentLoaded', () => document.querySelectorAll('.reveal,.stagger-children').forEach(el=>ro.observe(el)));
+    var ro = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+            if (e.isIntersecting) { e.target.classList.add('active'); ro.unobserve(e.target); }
+        });
+    }, { threshold: 0.07 });
 
-    let currentModal=null;
-    function openModal(id){if(currentModal)closeModal(currentModal);document.getElementById(id).classList.add('open');document.body.style.overflow='hidden';currentModal=id;}
-    function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';currentModal=null;}
-    document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)closeModal(o.id);}));
-    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&currentModal)closeModal(currentModal);});
+    var currentModal = null;
+    function openModal(id) {
+        if (currentModal) closeModal(currentModal);
+        document.getElementById(id).classList.add('open');
+        document.body.style.overflow = 'hidden';
+        currentModal = id;
+    }
+    function closeModal(id) {
+        document.getElementById(id).classList.remove('open');
+        document.body.style.overflow = '';
+        currentModal = null;
+    }
+    document.querySelectorAll('.modal-overlay').forEach(function(o) {
+        o.addEventListener('click', function(e) { if (e.target === o) closeModal(o.id); });
+    });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && currentModal) closeModal(currentModal); });
 
-    document.querySelectorAll('.glass-card').forEach(card=>{
-        card.addEventListener('mousemove',e=>{
-            const r=card.getBoundingClientRect();
-            card.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
-            card.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
+    document.querySelectorAll('.glass-card').forEach(function(card) {
+        card.addEventListener('mousemove', function(e) {
+            var r = card.getBoundingClientRect();
+            card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+            card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
         });
     });
 
-    (function(){
-        const canvas=document.getElementById('particle-canvas'),ctx=canvas.getContext('2d');
-        let W,H,particles=[];
-        function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
-        resize();window.addEventListener('resize',resize);
-        function rand(a,b){return Math.random()*(b-a)+a;}
-        function P(){this.x=rand(0,W);this.y=rand(0,H);this.r=rand(0.5,1.8);this.vx=rand(-0.15,0.15);this.vy=rand(-0.3,-0.08);this.alpha=rand(0.1,0.5);this.color=Math.random()>0.6?'168,85,247':'255,255,255';}
-        for(let i=0;i<100;i++)particles.push(new P());
-        function draw(){ctx.clearRect(0,0,W,H);particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(${p.color},${p.alpha})`;ctx.fill();p.x+=p.vx;p.y+=p.vy;if(p.y<-5||p.x<-5||p.x>W+5){p.x=rand(0,W);p.y=H+5;}});requestAnimationFrame(draw);}
+    (function() {
+        var canvas = document.getElementById('particle-canvas'), ctx = canvas.getContext('2d');
+        var W, H, particles = [];
+        function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+        resize(); window.addEventListener('resize', resize);
+        function rand(a, b) { return Math.random() * (b - a) + a; }
+        function P() { this.x = rand(0,W); this.y = rand(0,H); this.r = rand(0.5,1.8); this.vx = rand(-0.15,0.15); this.vy = rand(-0.3,-0.08); this.alpha = rand(0.1,0.5); this.color = Math.random() > 0.6 ? '168,85,247' : '255,255,255'; }
+        for (var i = 0; i < 100; i++) particles.push(new P());
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+            particles.forEach(function(p) {
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(' + p.color + ',' + p.alpha + ')'; ctx.fill();
+                p.x += p.vx; p.y += p.vy;
+                if (p.y < -5 || p.x < -5 || p.x > W + 5) { p.x = rand(0, W); p.y = H + 5; }
+            });
+            requestAnimationFrame(draw);
+        }
         draw();
     })();
 
-    document.querySelectorAll('.btn-premium').forEach(btn=>{
-        btn.addEventListener('click',function(e){
-            const r=document.createElement('span'),size=Math.max(this.offsetWidth,this.offsetHeight),rect=this.getBoundingClientRect();
-            r.style.cssText=`position:absolute;border-radius:50%;width:${size}px;height:${size}px;left:${e.clientX-rect.left-size/2}px;top:${e.clientY-rect.top-size/2}px;background:rgba(255,255,255,0.25);transform:scale(0);pointer-events:none;animation:ripple 0.55s ease-out forwards;`;
-            if(!document.querySelector('#ripple-style')){const s=document.createElement('style');s.id='ripple-style';s.textContent='@keyframes ripple{to{transform:scale(2.5);opacity:0}}';document.head.appendChild(s);}
-            this.style.position='relative';this.appendChild(r);setTimeout(()=>r.remove(),600);
+    document.querySelectorAll('.btn-premium').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            var r = document.createElement('span'),
+                size = Math.max(this.offsetWidth, this.offsetHeight),
+                rect = this.getBoundingClientRect();
+            r.style.cssText = 'position:absolute;border-radius:50%;width:' + size + 'px;height:' + size + 'px;left:' + (e.clientX - rect.left - size / 2) + 'px;top:' + (e.clientY - rect.top - size / 2) + 'px;background:rgba(255,255,255,0.25);transform:scale(0);pointer-events:none;animation:ripple 0.55s ease-out forwards;';
+            if (!document.querySelector('#ripple-style')) {
+                var s = document.createElement('style'); s.id = 'ripple-style';
+                s.textContent = '@keyframes ripple{to{transform:scale(2.5);opacity:0}}';
+                document.head.appendChild(s);
+            }
+            this.style.position = 'relative'; this.appendChild(r); setTimeout(function() { r.remove(); }, 600);
         });
     });
     </script>
