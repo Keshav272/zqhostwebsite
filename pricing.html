@@ -7,387 +7,473 @@
     <link rel="icon" type="image/png" href="ZQ_logo.png" />
     <meta name="description" content="ZQ Hosting pricing plans — Standard, Pro, Premium with flexible add-ons. Minecraft server hosting starting from ₹199/month.">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,300&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-    <style>
-        :root { --bg-deep:#040407; --card-base:rgba(12,12,18,0.75); --accent:#a855f7; --accent-glow:rgba(168,85,247,0.25); --border:rgba(255,255,255,0.07); }
-        html { scroll-behavior:smooth; }
-        *,*::before,*::after { box-sizing:border-box; }
-        body { background-color:var(--bg-deep); color:#fafafa; font-family:'Plus Jakarta Sans',sans-serif; overflow-x:hidden; }
-        h1,h2,h3,h4,.brand { font-family:'Plus Jakarta Sans',sans-serif; }
-        nav { background:rgba(4,4,7,0.75); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px); border-bottom:1px solid var(--border); transition:background 0.4s ease; }
-        .orb { position:fixed; border-radius:50%; filter:blur(120px); z-index:-1; opacity:0; animation:orbFloat 25s infinite alternate ease-in-out,orbFadeIn 2s forwards; }
-        .orb-1 { width:600px; height:600px; background:var(--accent); top:-15%; left:-12%; animation-delay:0s,0.3s; }
-        .orb-2 { width:450px; height:450px; background:#6366f1; bottom:-15%; right:-10%; animation-delay:-8s,0.6s; }
-        .orb-3 { width:300px; height:300px; background:#ec4899; top:40%; left:50%; animation-delay:-14s,0.9s; }
-        @keyframes orbFadeIn { to{opacity:0.12} }
-        @keyframes orbFloat { 0%{transform:translate(0,0) scale(1)} 33%{transform:translate(30px,-40px) scale(1.05)} 66%{transform:translate(-20px,20px) scale(0.97)} 100%{transform:translate(15px,-15px) scale(1.03)} }
-        #cursor-glow { position:fixed; width:600px; height:600px; background:radial-gradient(circle,rgba(168,85,247,0.1) 0%,transparent 65%); border-radius:50%; pointer-events:none; z-index:-1; transform:translate(-50%,-50%); transition:opacity 0.3s; }
-        #particle-canvas { position:fixed; inset:0; z-index:-1; pointer-events:none; }
-        .glass-card { background:var(--card-base); border:1px solid var(--border); backdrop-filter:blur(20px); position:relative; overflow:hidden; transition:transform 0.55s cubic-bezier(0.16,1,0.3,1),border-color 0.4s,box-shadow 0.4s; }
-        .glass-card.overflow-visible-badge { overflow:visible; }
-        .glass-card.overflow-visible-badge::after { border-radius:2.5rem; }
-        .glass-card::after { content:''; position:absolute; inset:0; background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(168,85,247,0.08),transparent 70%); opacity:0; transition:opacity 0.4s; pointer-events:none; }
-        .glass-card:hover::after { opacity:1; }
-        .glass-card:hover { border-color:rgba(168,85,247,0.5); box-shadow:0 0 50px rgba(168,85,247,0.15),0 30px 60px rgba(0,0,0,0.5); transform:translateY(-8px) scale(1.01); }
-        .premium-text { background:linear-gradient(110deg,#fff 20%,#a855f7 50%,#fff 80%); background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; animation:textShimmer 4s linear infinite; }
-        @keyframes textShimmer { to{background-position:200% center} }
-        .btn-premium { background:var(--accent); box-shadow:0 0 24px rgba(168,85,247,0.4); transition:all 0.35s cubic-bezier(0.16,1,0.3,1); color:white; position:relative; overflow:hidden; z-index:10; }
-        .btn-premium::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,0.15) 0%,transparent 60%); opacity:0; transition:opacity 0.3s; }
-        .btn-premium:hover::before { opacity:1; }
-        .btn-premium:hover { transform:scale(1.06) translateY(-3px); box-shadow:0 0 40px rgba(168,85,247,0.6),0 12px 32px rgba(0,0,0,0.4); }
-        .reveal { opacity:0; transform:translateY(40px); transition:opacity 1s cubic-bezier(0.16,1,0.3,1),transform 1s cubic-bezier(0.16,1,0.3,1); }
-        .reveal.active { opacity:1; transform:translateY(0); }
-        .stagger-children > * { opacity:0; transform:translateY(30px); transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1); }
-        .stagger-children.active > *:nth-child(1){opacity:1;transform:translateY(0);transition-delay:0.05s}
-        .stagger-children.active > *:nth-child(2){opacity:1;transform:translateY(0);transition-delay:0.15s}
-        .stagger-children.active > *:nth-child(3){opacity:1;transform:translateY(0);transition-delay:0.25s}
-        .stagger-children.active > *:nth-child(4){opacity:1;transform:translateY(0);transition-delay:0.35s}
-        .stagger-children.active > *:nth-child(5){opacity:1;transform:translateY(0);transition-delay:0.45s}
-        @keyframes heroIn { from{opacity:0;transform:translateY(60px) scale(0.96)} to{opacity:1;transform:translateY(0) scale(1)} }
-        .fade-d1{animation:heroIn 1.2s cubic-bezier(0.16,1,0.3,1) 0.1s both}
-        .fade-d2{animation:heroIn 1.2s cubic-bezier(0.16,1,0.3,1) 0.25s both}
-        .fade-d3{animation:heroIn 1.2s cubic-bezier(0.16,1,0.3,1) 0.4s both}
-        @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
-        .price-slashed { text-decoration:line-through; color:#3f3f46; font-size:1rem; font-weight:600; margin-right:6px; }
-        .divider { width:60px; height:3px; background:linear-gradient(90deg,var(--accent),transparent); border-radius:999px; }
-        .logo-link { display:flex; align-items:center; gap:10px; text-decoration:none; transition:opacity 0.2s; }
-        .logo-link:hover { opacity:0.85; }
-        .icon-ring { width:48px; height:48px; background:rgba(168,85,247,0.1); border:1px solid rgba(168,85,247,0.2); border-radius:14px; display:flex; align-items:center; justify-content:center; transition:all 0.4s; }
-        .glass-card:hover .icon-ring { background:rgba(168,85,247,0.25); box-shadow:0 0 24px rgba(168,85,247,0.4); transform:scale(1.1) rotate(5deg); }
-        ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#0a0a0f}::-webkit-scrollbar-thumb{background:rgba(168,85,247,0.4);border-radius:99px}
-        #scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#a855f7,#6366f1,#ec4899);z-index:1000;width:0%;transition:width 0.1s}
-        .grid-pattern{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;mask-image:radial-gradient(ellipse at center,black 0%,transparent 70%)}
-        .plan-popular-glow{box-shadow:0 0 60px rgba(168,85,247,0.2),0 0 120px rgba(168,85,247,0.08)}
-        .slots-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);color:#f87171;font-size:10px;font-weight:800;padding:5px 12px;border-radius:999px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem}
-        .slots-badge::before{content:'';width:6px;height:6px;background:#f87171;border-radius:50%;animation:blink 1.2s ease-in-out infinite}
-        .currency-btn{padding:8px 16px;border-radius:10px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;transition:all 0.25s;cursor:pointer;border:1px solid var(--border);background:transparent;color:#71717a}
-        .currency-btn.active{background:var(--accent);border-color:var(--accent);color:white;box-shadow:0 0 16px rgba(168,85,247,0.4)}
-        .currency-btn:hover:not(.active){border-color:rgba(168,85,247,0.4);color:#a855f7}
-        .addon-card{background:rgba(12,12,18,0.6);border:1px solid var(--border);border-radius:20px;padding:20px 24px;display:flex;align-items:center;gap:16px;transition:all 0.4s cubic-bezier(0.16,1,0.3,1)}
-        .addon-card:hover{border-color:rgba(168,85,247,0.4);background:rgba(168,85,247,0.05);transform:translateX(6px)}
-        .addon-icon{width:44px;height:44px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-        .price-display{transition:all 0.3s cubic-bezier(0.16,1,0.3,1)}
-        .price-change{animation:priceFlip 0.35s cubic-bezier(0.16,1,0.3,1)}
-        @keyframes priceFlip{0%{opacity:0;transform:translateY(-8px)}100%{opacity:1;transform:translateY(0)}}
-        .badge-pulse::before{content:'';display:inline-block;width:7px;height:7px;background:#4ade80;border-radius:50%;margin-right:8px;animation:blink 1.4s ease-in-out infinite}
-        #backToTop{position:fixed;bottom:32px;right:32px;width:52px;height:52px;background:var(--accent);border-radius:16px;display:flex;align-items:center;justify-content:center;color:white;cursor:pointer;z-index:100;opacity:0;transition:all 0.4s cubic-bezier(0.16,1,0.3,1);transform:translateY(30px) scale(0.8);box-shadow:0 8px 24px rgba(168,85,247,0.4)}
-        #backToTop.show{opacity:1;transform:translateY(0) scale(1)}
-        #backToTop:hover{transform:translateY(-4px) scale(1.1)}
-        .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity 0.35s ease}
-        .modal-overlay.open{opacity:1;pointer-events:all}
-        .modal-box{background:rgba(15,15,22,0.98);border:1px solid rgba(168,85,247,0.25);border-radius:2.5rem;padding:3rem;max-width:480px;width:100%;position:relative;transform:scale(0.88) translateY(30px);transition:transform 0.4s cubic-bezier(0.16,1,0.3,1)}
-        .modal-overlay.open .modal-box{transform:scale(1) translateY(0)}
-        .modal-close-btn{position:absolute;top:1.5rem;right:1.5rem;width:36px;height:36px;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#71717a;transition:all 0.25s}
-        .modal-close-btn:hover{background:rgba(168,85,247,0.15);color:white;border-color:var(--accent)}
-        .dur-btn{padding:7px 14px;border-radius:8px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;transition:all 0.2s;cursor:pointer;border:1px solid var(--border);background:transparent;color:#71717a;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
-        .dur-btn.active{background:rgba(168,85,247,0.15);border-color:rgba(168,85,247,0.5);color:#c084fc}
-        .dur-btn:hover:not(.active){border-color:rgba(168,85,247,0.3);color:#a855f7}
-        .per-day-note{font-size:11px;color:#52525b;font-weight:600}
-        .savings-tag{display:inline-flex;align-items:center;gap:4px;background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.2);color:#4ade80;font-size:9px;font-weight:800;padding:3px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:0.08em}
-        .best-value-tag{display:inline-flex;align-items:center;background:rgba(250,204,21,0.1);border:1px solid rgba(250,204,21,0.2);color:#fbbf24;font-size:9px;font-weight:800;padding:3px 9px;border-radius:999px;text-transform:uppercase;letter-spacing:0.08em}
-        .flexible-tag{display:inline-flex;align-items:center;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);color:#818cf8;font-size:9px;font-weight:800;padding:3px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:0.08em}
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div id="scroll-progress"></div>
-    <canvas id="particle-canvas"></canvas>
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-    <div id="cursor-glow"></div>
-    <div id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></div>
 
-    <nav class="fixed w-full top-0 flex items-center justify-between px-6 md:px-12 py-4 z-50">
-        <a href="index.html" class="logo-link">
-            <img src="ZQ_logo.png" alt="ZQ Logo" class="h-9 w-9 object-contain rounded-lg" onerror="this.style.display='none'" />
-            <span class="brand text-xl font-black tracking-tight uppercase">ZQ<span class="text-purple-500">Hosting</span></span>
-        </a>
-        <div class="hidden lg:flex gap-10 text-[11px] font-bold tracking-widest text-zinc-400">
-            <a href="index.html" class="hover:text-purple-400 transition">HOME</a>
-            <a href="pricing.html" class="text-purple-400 transition">PRICING</a>
-            <a href="index.html#features" class="hover:text-purple-400 transition">FEATURES</a>
-            <a href="https://dsc.gg/zqhosting" target="_blank" class="hover:text-purple-400 transition">SUPPORT</a>
-        </div>
-        <a href="https://panel.zqhost.qzz.io" target="_blank" class="btn-premium px-7 py-3 rounded-full text-xs font-black uppercase tracking-wider">
-            <i class="fas fa-ghost mr-2"></i>Client Panel
-        </a>
-    </nav>
+<div class="scanlines"></div>
+<div id="scroll-progress"></div>
+<canvas id="bg-canvas"></canvas>
+<div id="cursor-glow"></div>
 
-    <header class="relative pt-36 pb-16 px-6 text-center overflow-hidden">
-        <div class="grid-pattern"></div>
-        <div class="fade-d1 inline-flex items-center px-5 py-2 rounded-full border border-purple-500/20 bg-purple-500/10 text-purple-300 text-[11px] font-bold tracking-[0.2em] uppercase mb-8 backdrop-blur-md badge-pulse">
-            Simple, Transparent Pricing
+<nav id="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">
+            <div class="logo-mark">
+                <img src="ZQ_logo.png" alt="ZQ" onerror="this.parentElement.innerHTML='<span class=\'logo-zq\'>ZQ</span>'" />
+            </div>
+            <div class="logo-text">
+                <span class="logo-brand">ZQ<span class="logo-accent">HOSTING</span></span>
+            </div>
+        </a>
+
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">HOME</a>
+            <a href="pricing.html" class="nav-link active">PRICING</a>
+            <a href="index.html#features" class="nav-link">FEATURES</a>
+            <a href="https://dsc.gg/zqhosting" target="_blank" class="nav-link">SUPPORT</a>
         </div>
-        <h1 class="fade-d2 text-5xl md:text-7xl font-black mb-6 tracking-tighter leading-[0.9]">
-            Plans Built for<br><span class="premium-text">Every Crafter.</span>
+
+        <div class="nav-actions">
+            <a href="https://panel.zqhost.qzz.io" target="_blank" class="btn-cyber">
+                <span class="btn-cyber-text"><i class="fas fa-terminal mr-2"></i>CLIENT PANEL</span>
+                <span class="btn-cyber-border"></span>
+            </a>
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+    <div class="nav-mobile" id="nav-mobile">
+        <a href="index.html" class="nav-mobile-link">HOME</a>
+        <a href="pricing.html" class="nav-mobile-link">PRICING</a>
+        <a href="index.html#features" class="nav-mobile-link">FEATURES</a>
+        <a href="https://dsc.gg/zqhosting" target="_blank" class="nav-mobile-link">SUPPORT</a>
+        <a href="https://panel.zqhost.qzz.io" target="_blank" class="btn-cyber w-full text-center mt-4">
+            <span class="btn-cyber-text">CLIENT PANEL</span>
+            <span class="btn-cyber-border"></span>
+        </a>
+    </div>
+</nav>
+
+<section class="pricing-hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow-left" style="opacity:0.5"></div>
+    <div class="section-container" style="position:relative;z-index:1">
+        <div class="hero-badge animate-fade-up" style="animation-delay:0.1s">
+            <span class="badge-dot"></span>
+            SIMPLE, TRANSPARENT PRICING
+        </div>
+        <h1 class="hero-headline animate-fade-up" style="animation-delay:0.25s;font-size:clamp(2.5rem,7vw,5.5rem)">
+            <span class="headline-line">PLANS BUILT FOR</span>
+            <span class="headline-line headline-gradient">EVERY CRAFTER.</span>
         </h1>
-        <p class="fade-d3 text-zinc-400 text-lg max-w-xl mx-auto mb-10 font-light leading-relaxed">
+        <p class="hero-sub animate-fade-up" style="animation-delay:0.4s">
             Pick your plan, customize with add-ons, and go live in minutes. No hidden fees.
         </p>
 
-        <div class="fade-d3 flex flex-wrap justify-center gap-2 mb-4" id="currency-switcher">
-            <button class="currency-btn active" onclick="setCurrency('INR')">&#8377; INR</button>
-            <button class="currency-btn" onclick="setCurrency('USD')">$ USD</button>
-            <button class="currency-btn" onclick="setCurrency('EUR')">&euro; EUR</button>
-            <button class="currency-btn" onclick="setCurrency('GBP')">&pound; GBP</button>
-            <button class="currency-btn" onclick="setCurrency('AED')">&#1583;.&#1573; AED</button>
-            <button class="currency-btn" onclick="setCurrency('SGD')">S$ SGD</button>
-            <button class="currency-btn" onclick="setCurrency('AUD')">A$ AUD</button>
+        <div class="currency-switcher animate-fade-up" style="animation-delay:0.5s" id="currency-switcher">
+            <button class="cur-btn active" onclick="setCurrency('INR')">₹ INR</button>
+            <button class="cur-btn" onclick="setCurrency('USD')">$ USD</button>
+            <button class="cur-btn" onclick="setCurrency('EUR')">€ EUR</button>
+            <button class="cur-btn" onclick="setCurrency('GBP')">£ GBP</button>
+            <button class="cur-btn" onclick="setCurrency('AED')">د.إ AED</button>
+            <button class="cur-btn" onclick="setCurrency('SGD')">S$ SGD</button>
+            <button class="cur-btn" onclick="setCurrency('AUD')">A$ AUD</button>
         </div>
-        <p class="text-zinc-600 text-xs mb-2" id="currency-note">Showing prices in INR</p>
-    </header>
+        <p class="fx-note animate-fade-up" style="animation-delay:0.55s" id="currency-note">Showing prices in INR</p>
+    </div>
+</section>
 
-    <section class="py-16 max-w-7xl mx-auto px-6 relative z-10">
-        <div class="flex flex-wrap justify-center gap-2 mb-10" id="duration-switcher">
-            <button class="dur-btn" data-dur="1w" onclick="setDuration('1w')">1 Week <span class="flexible-tag">Flexible</span></button>
-            <button class="dur-btn" data-dur="2w" onclick="setDuration('2w')">2 Weeks <span class="flexible-tag">Flexible</span></button>
-            <button class="dur-btn active" data-dur="mo" onclick="setDuration('mo')">Monthly</button>
-            <button class="dur-btn" data-dur="3mo" onclick="setDuration('3mo')">Quarterly</button>
-            <button class="dur-btn" data-dur="6mo" onclick="setDuration('6mo')">6 Months</button>
-            <button class="dur-btn" data-dur="yr" onclick="setDuration('yr')">Yearly <span class="best-value-tag">Best Value</span></button>
+<section class="section-plans" style="padding-top:3rem">
+    <div class="section-container">
+
+        <div class="dur-switcher stagger-reveal" id="duration-switcher">
+            <button class="dur-btn" data-dur="1w" onclick="setDuration('1w')">
+                1 Week <span class="dur-tag dur-tag-flex">FLEXIBLE</span>
+            </button>
+            <button class="dur-btn" data-dur="2w" onclick="setDuration('2w')">
+                2 Weeks <span class="dur-tag dur-tag-flex">FLEXIBLE</span>
+            </button>
+            <button class="dur-btn active" data-dur="mo" onclick="setDuration('mo')">
+                Monthly
+            </button>
+            <button class="dur-btn" data-dur="3mo" onclick="setDuration('3mo')">
+                Quarterly
+            </button>
+            <button class="dur-btn" data-dur="6mo" onclick="setDuration('6mo')">
+                6 Months
+            </button>
+            <button class="dur-btn" data-dur="yr" onclick="setDuration('yr')">
+                Yearly <span class="dur-tag dur-tag-best">BEST VALUE</span>
+            </button>
         </div>
 
-        <div class="grid lg:grid-cols-3 gap-8">
-            <div class="glass-card p-10 rounded-[2.5rem] flex flex-col h-full border-zinc-800">
-                <div class="slots-badge">Limited Slots</div>
-                <h3 class="text-zinc-500 font-bold uppercase tracking-widest text-xs mb-1">Standard Plan</h3>
-                <p class="text-zinc-600 text-xs mb-5 font-semibold">Vanilla and Up to 10&ndash;15 Players Recommended</p>
-                <div class="flex items-baseline mb-1">
-                    <span class="price-slashed price-orig-standard"></span>
-                    <span class="text-5xl font-black price-display" id="price-standard">&#8377;199</span>
-                    <span class="text-zinc-500 text-sm font-normal" id="period-standard">/month</span>
+        <div class="plans-grid stagger-reveal">
+            <div class="plan-card">
+                <div class="plan-card-bg"></div>
+                <div class="plan-slots-badge"><span class="pulse-dot"></span> LIMITED SLOTS</div>
+                <div class="plan-tier">STANDARD</div>
+                <div class="plan-desc">Vanilla & up to 10–15 Players</div>
+                <div class="plan-price-wrap" style="flex-wrap:wrap;gap:0.25rem">
+                    <span class="plan-price-orig price-orig-standard">₹800</span>
+                    <div class="plan-price">
+                        <span class="price-display" id="price-standard">₹199</span>
+                    </div>
+                    <span class="plan-period" id="period-standard">/month</span>
                 </div>
-                <div class="flex items-center gap-2 mb-7 flex-wrap">
-                    <span class="per-day-note" id="perday-standard"></span>
-                    <span class="savings-tag" id="savings-standard" style="display:none"></span>
+                <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1.5rem;flex-wrap:wrap">
+                    <span style="font-size:0.75rem;color:var(--text-mute)" id="perday-standard"></span>
+                    <span id="savings-standard" style="display:none;font-family:var(--font-mono);font-size:0.6rem;font-weight:700;letter-spacing:0.1em;background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.2);color:#4ade80;padding:3px 10px;border-radius:999px"></span>
                 </div>
-                <ul class="space-y-4 text-zinc-400 mb-12 flex-grow text-sm">
-                    <li><i class="fas fa-check text-purple-500 mr-3"></i> 65% CPU</li>
-                    <li><i class="fas fa-check text-purple-500 mr-3"></i> 3 GB RAM</li>
-                    <li><i class="fas fa-folder text-purple-500 mr-3"></i> 10 GB NVMe SSD</li>
-                    <li><i class="fas fa-user-shield text-purple-500 mr-3"></i> Basic DDoS Protection</li>
-                    <li><i class="fas fa-terminal text-purple-500 mr-3"></i> Pelican UI Access</li>
-                    <li><i class="fas fa-database text-purple-500 mr-3"></i> 1 Managed Backup</li>
-                    <li><i class="fas fa-wifi text-purple-500 mr-3"></i> 99% Uptime</li>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i>65% CPU Allocation</li>
+                    <li><i class="fas fa-check"></i>3 GB RAM</li>
+                    <li><i class="fas fa-check"></i>10 GB NVMe SSD</li>
+                    <li><i class="fas fa-check"></i>Basic DDoS Protection</li>
+                    <li><i class="fas fa-check"></i>Pelican UI Access</li>
+                    <li><i class="fas fa-check"></i>1 Managed Backup</li>
+                    <li><i class="fas fa-check"></i>99% Uptime</li>
                 </ul>
-                <button onclick="openModal('purchase-modal')" class="w-full py-5 rounded-2xl btn-premium font-black uppercase tracking-widest text-xs">Purchase</button>
+                <button onclick="openModal('purchase-modal')" class="plan-btn">
+                    PURCHASE <i class="fas fa-arrow-right"></i>
+                </button>
             </div>
 
-            <div class="glass-card overflow-visible-badge p-10 rounded-[2.5rem] flex flex-col h-full border-purple-500/50 scale-105 z-20 plan-popular-glow">
-                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-purple-600 text-[10px] font-black px-5 py-1.5 rounded-full uppercase tracking-tighter shadow-lg">Most Popular</div>
-                <div class="slots-badge">Limited Slots</div>
-                <h3 class="text-purple-400 font-bold uppercase tracking-widest text-xs mb-4">Pro Plan</h3>
-                <div class="flex items-baseline mb-1">
-                    <span class="price-slashed price-orig-pro"></span>
-                    <span class="text-6xl font-black price-display" id="price-pro">&#8377;549</span>
-                    <span class="text-zinc-500 text-sm font-normal" id="period-pro">/month</span>
+            <div class="plan-card plan-card-featured">
+                <div class="plan-card-bg"></div>
+                <div class="plan-popular-badge">MOST POPULAR</div>
+                <div class="plan-slots-badge"><span class="pulse-dot"></span> LIMITED SLOTS</div>
+                <div class="plan-tier plan-tier-featured">PRO</div>
+                <div class="plan-desc">Modpacks & up to 20–30 Players</div>
+                <div class="plan-price-wrap" style="flex-wrap:wrap;gap:0.25rem">
+                    <span class="plan-price-orig price-orig-pro">₹1500</span>
+                    <div class="plan-price">
+                        <span class="price-display" id="price-pro">₹549</span>
+                    </div>
+                    <span class="plan-period" id="period-pro">/month</span>
                 </div>
-                <div class="flex items-center gap-2 mb-7 flex-wrap">
-                    <span class="per-day-note" id="perday-pro"></span>
-                    <span class="savings-tag" id="savings-pro" style="display:none"></span>
+                <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1.5rem;flex-wrap:wrap">
+                    <span style="font-size:0.75rem;color:var(--text-mute)" id="perday-pro"></span>
+                    <span id="savings-pro" style="display:none;font-family:var(--font-mono);font-size:0.6rem;font-weight:700;letter-spacing:0.1em;background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.2);color:#4ade80;padding:3px 10px;border-radius:999px"></span>
                 </div>
-                <ul class="space-y-4 text-zinc-300 mb-12 flex-grow text-sm">
-                    <li><i class="fas fa-check text-purple-500 mr-3"></i> 125% CPU</li>
-                    <li><i class="fas fa-check text-purple-500 mr-3"></i> 6 GB RAM</li>
-                    <li><i class="fas fa-folder text-purple-500 mr-3"></i> 25 GB NVMe SSD</li>
-                    <li><i class="fas fa-user-shield text-purple-500 mr-3"></i> Advanced DDoS Protection</li>
-                    <li><i class="fas fa-database text-purple-500 mr-3"></i> 3 Managed Backups</li>
-                    <li><i class="fas fa-plug text-purple-500 mr-3"></i> Premium Plugins Kit Included</li>
-                    <li><i class="fas fa-wifi text-purple-500 mr-3"></i> 99% Uptime</li>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i>125% CPU Allocation</li>
+                    <li><i class="fas fa-check"></i>6 GB RAM</li>
+                    <li><i class="fas fa-check"></i>25 GB NVMe SSD</li>
+                    <li><i class="fas fa-check"></i>Advanced DDoS Protection</li>
+                    <li><i class="fas fa-check"></i>3 Managed Backups</li>
+                    <li><i class="fas fa-check"></i>Premium Plugins Kit</li>
+                    <li><i class="fas fa-check"></i>99% Uptime</li>
                 </ul>
-                <button onclick="openModal('purchase-modal')" class="w-full py-5 rounded-2xl btn-premium font-black uppercase tracking-widest text-xs">Purchase</button>
+                <button onclick="openModal('purchase-modal')" class="plan-btn plan-btn-featured">
+                    PURCHASE <i class="fas fa-arrow-right"></i>
+                    <span class="btn-shine"></span>
+                </button>
             </div>
 
-            <div class="glass-card p-10 rounded-[2.5rem] flex flex-col h-full border-zinc-800">
-                <div class="slots-badge">Limited Slots</div>
-                <h3 class="text-zinc-500 font-bold uppercase tracking-widest text-xs mb-4">Premium Plan</h3>
-                <div class="flex items-baseline mb-1">
-                    <span class="price-slashed price-orig-premium"></span>
-                    <span class="text-5xl font-black price-display" id="price-premium">&#8377;949</span>
-                    <span class="text-zinc-500 text-sm font-normal" id="period-premium">/month</span>
+            <div class="plan-card">
+                <div class="plan-card-bg"></div>
+                <div class="plan-slots-badge"><span class="pulse-dot"></span> LIMITED SLOTS</div>
+                <div class="plan-tier">PREMIUM</div>
+                <div class="plan-desc">Heavy Modpacks & 40+ Players</div>
+                <div class="plan-price-wrap" style="flex-wrap:wrap;gap:0.25rem">
+                    <span class="plan-price-orig price-orig-premium">₹3000</span>
+                    <div class="plan-price">
+                        <span class="price-display" id="price-premium">₹949</span>
+                    </div>
+                    <span class="plan-period" id="period-premium">/month</span>
                 </div>
-                <div class="flex items-center gap-2 mb-7 flex-wrap">
-                    <span class="per-day-note" id="perday-premium"></span>
-                    <span class="savings-tag" id="savings-premium" style="display:none"></span>
+                <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1.5rem;flex-wrap:wrap">
+                    <span style="font-size:0.75rem;color:var(--text-mute)" id="perday-premium"></span>
+                    <span id="savings-premium" style="display:none;font-family:var(--font-mono);font-size:0.6rem;font-weight:700;letter-spacing:0.1em;background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.2);color:#4ade80;padding:3px 10px;border-radius:999px"></span>
                 </div>
-                <ul class="space-y-4 text-zinc-400 mb-12 flex-grow text-sm">
-                    <li><i class="fas fa-check text-purple-500 mr-3"></i> 185% CPU</li>
-                    <li><i class="fas fa-check text-purple-500 mr-3"></i> 12 GB RAM</li>
-                    <li><i class="fas fa-folder text-purple-500 mr-3"></i> 50 GB NVMe SSD</li>
-                    <li><i class="fas fa-user-shield text-purple-500 mr-3"></i> Advanced DDoS Protection</li>
-                    <li><i class="fas fa-database text-purple-500 mr-3"></i> 7 Managed Backups</li>
-                    <li><i class="fas fa-globe text-purple-500 mr-3"></i> Custom Domain</li>
-                    <li><i class="fas fa-wifi text-purple-500 mr-3"></i> 99% Uptime</li>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check"></i>185% CPU Allocation</li>
+                    <li><i class="fas fa-check"></i>12 GB RAM</li>
+                    <li><i class="fas fa-check"></i>50 GB NVMe SSD</li>
+                    <li><i class="fas fa-check"></i>Advanced DDoS Protection</li>
+                    <li><i class="fas fa-check"></i>7 Managed Backups</li>
+                    <li><i class="fas fa-check"></i>Custom Domain</li>
+                    <li><i class="fas fa-check"></i>99% Uptime</li>
                 </ul>
-                <button onclick="openModal('purchase-modal')" class="w-full py-5 rounded-2xl btn-premium font-black uppercase tracking-widest text-xs">Purchase</button>
-            </div>
-        </div>
-        <p class="text-center text-zinc-600 text-xs mt-6" id="fx-note" style="display:none">* International prices are billed in INR equivalent at checkout. Shown price is approximate.</p>
-    </section>
-
-    <section class="py-20 max-w-5xl mx-auto px-6 relative z-10 reveal">
-        <div class="text-center mb-14">
-            <p class="text-purple-400 text-xs font-black tracking-[0.25em] uppercase mb-3">Customise</p>
-            <h2 class="text-3xl md:text-4xl font-extrabold mb-4 premium-text">Power-Ups &amp; Add-ons</h2>
-            <p class="text-zinc-500 text-sm max-w-lg mx-auto">Bolt-on exactly what you need. All add-ons are billed monthly alongside your plan.</p>
-            <div class="divider mx-auto mt-5"></div>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-4 stagger-children reveal">
-            <div class="addon-card">
-                <div class="addon-icon"><i class="fas fa-memory text-purple-400"></i></div>
-                <div class="flex-1">
-                    <div class="font-bold text-sm mb-0.5">Extra RAM</div>
-                    <div class="text-zinc-500 text-xs">Boost performance for modpacks &amp; large player counts</div>
-                </div>
-                <div class="text-right flex-shrink-0">
-                    <div class="font-black text-lg addon-price" data-inr="99">&#8377;99</div>
-                    <div class="text-zinc-600 text-[10px] font-semibold">per GB / mo</div>
-                </div>
-            </div>
-            <div class="addon-card">
-                <div class="addon-icon"><i class="fas fa-network-wired text-purple-400"></i></div>
-                <div class="flex-1">
-                    <div class="font-bold text-sm mb-0.5">Extra Port</div>
-                    <div class="text-zinc-500 text-xs">Run multiple services &mdash; proxy, dynmap, SFTP, etc.</div>
-                </div>
-                <div class="text-right flex-shrink-0">
-                    <div class="font-black text-lg addon-price" data-inr="69">&#8377;69</div>
-                    <div class="text-zinc-600 text-[10px] font-semibold">per port / mo</div>
-                </div>
-            </div>
-            <div class="addon-card">
-                <div class="addon-icon"><i class="fas fa-hard-drive text-purple-400"></i></div>
-                <div class="flex-1">
-                    <div class="font-bold text-sm mb-0.5">Extra Storage</div>
-                    <div class="text-zinc-500 text-xs">More NVMe SSD space for large worlds &amp; mods</div>
-                </div>
-                <div class="text-right flex-shrink-0">
-                    <div class="font-black text-lg addon-price" data-inr="59">&#8377;59</div>
-                    <div class="text-zinc-600 text-[10px] font-semibold">per GB / mo</div>
-                </div>
-            </div>
-            <div class="addon-card">
-                <div class="addon-icon"><i class="fas fa-globe text-purple-400"></i></div>
-                <div class="flex-1">
-                    <div class="font-bold text-sm mb-0.5">Custom Domain</div>
-                    <div class="text-zinc-500 text-xs">for eg- yourserver.qzz.io instead of a raw IP</div>
-                </div>
-                <div class="text-right flex-shrink-0">
-                    <div class="font-black text-lg addon-price" data-inr="150">&#8377;150</div>
-                    <div class="text-zinc-600 text-[10px] font-semibold">per mo</div>
-                </div>
-            </div>
-            <div class="addon-card md:col-span-2">
-                <div class="addon-icon"><i class="fas fa-cloud-arrow-up text-purple-400"></i></div>
-                <div class="flex-1">
-                    <div class="font-bold text-sm mb-0.5">Additional Backups</div>
-                    <div class="text-zinc-500 text-xs">Extra managed snapshots beyond your plan's included count</div>
-                </div>
-                <div class="text-right flex-shrink-0">
-                    <div class="font-black text-lg addon-price" data-inr="49">&#8377;49</div>
-                    <div class="text-zinc-600 text-[10px] font-semibold">per backup slot / mo</div>
-                </div>
+                <button onclick="openModal('purchase-modal')" class="plan-btn">
+                    PURCHASE <i class="fas fa-arrow-right"></i>
+                </button>
             </div>
         </div>
 
-        <div class="mt-10 text-center">
-            <p class="text-zinc-500 text-sm mb-6">Want a custom configuration? Talk to us on Discord.</p>
-            <a href="https://dsc.gg/zqhosting" target="_blank" class="btn-premium px-10 py-4 rounded-2xl font-black uppercase tracking-widest text-sm inline-block">
-                <i class="fab fa-discord mr-2"></i>Chat with Our Team
+        <p class="fx-note" id="fx-note" style="display:none">* International prices are approximate and billed in INR equivalent at checkout.</p>
+    </div>
+</section>
+
+<section class="section-addons">
+    <div class="section-container">
+        <div class="section-header reveal">
+            <div class="section-eyebrow">CUSTOMISE</div>
+            <h2 class="section-title">POWER-UPS & <span class="text-gradient">ADD-ONS</span></h2>
+            <p class="section-sub">Bolt on exactly what you need. All add-ons billed monthly alongside your plan.</p>
+        </div>
+
+        <div class="addon-grid stagger-reveal">
+            <div class="addon-card">
+                <div class="addon-icon"><i class="fas fa-memory"></i></div>
+                <div class="addon-info">
+                    <div class="addon-name">Extra RAM</div>
+                    <div class="addon-desc">Boost performance for modpacks & large player counts</div>
+                </div>
+                <div class="addon-price-col">
+                    <div class="addon-price addon-price-el" data-inr="99">₹99</div>
+                    <div class="addon-unit">per GB / mo</div>
+                </div>
+            </div>
+
+            <div class="addon-card">
+                <div class="addon-icon"><i class="fas fa-network-wired"></i></div>
+                <div class="addon-info">
+                    <div class="addon-name">Extra Port</div>
+                    <div class="addon-desc">Run multiple services — proxy, dynmap, SFTP, etc.</div>
+                </div>
+                <div class="addon-price-col">
+                    <div class="addon-price addon-price-el" data-inr="69">₹69</div>
+                    <div class="addon-unit">per port / mo</div>
+                </div>
+            </div>
+
+            <div class="addon-card">
+                <div class="addon-icon"><i class="fas fa-hard-drive"></i></div>
+                <div class="addon-info">
+                    <div class="addon-name">Extra Storage</div>
+                    <div class="addon-desc">More NVMe SSD space for large worlds & mods</div>
+                </div>
+                <div class="addon-price-col">
+                    <div class="addon-price addon-price-el" data-inr="59">₹59</div>
+                    <div class="addon-unit">per GB / mo</div>
+                </div>
+            </div>
+
+            <div class="addon-card">
+                <div class="addon-icon"><i class="fas fa-globe"></i></div>
+                <div class="addon-info">
+                    <div class="addon-name">Custom Domain</div>
+                    <div class="addon-desc">play.yourserver.com instead of a raw IP address</div>
+                </div>
+                <div class="addon-price-col">
+                    <div class="addon-price addon-price-el" data-inr="150">₹150</div>
+                    <div class="addon-unit">per mo</div>
+                </div>
+            </div>
+
+            <div class="addon-card" style="grid-column:1/-1">
+                <div class="addon-icon"><i class="fas fa-cloud-arrow-up"></i></div>
+                <div class="addon-info">
+                    <div class="addon-name">Additional Backups</div>
+                    <div class="addon-desc">Extra managed snapshots beyond your plan's included count</div>
+                </div>
+                <div class="addon-price-col">
+                    <div class="addon-price addon-price-el" data-inr="49">₹49</div>
+                    <div class="addon-unit">per slot / mo</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reveal" style="text-align:center;margin-top:3rem">
+            <p style="color:var(--text-mute);font-size:0.9rem;margin-bottom:1.5rem">Want a custom configuration? Talk to us on Discord.</p>
+            <a href="https://dsc.gg/zqhosting" target="_blank" class="btn-primary">
+                <i class="fab fa-discord"></i>
+                CHAT WITH OUR TEAM
+                <span class="btn-shine"></span>
             </a>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="py-20 max-w-3xl mx-auto px-6 relative z-10 reveal">
-        <div class="text-center mb-12">
-            <p class="text-purple-400 text-xs font-black tracking-[0.25em] uppercase mb-3">FAQ</p>
-            <h2 class="text-3xl font-extrabold premium-text mb-4">Common Questions</h2>
-            <div class="divider mx-auto"></div>
+<section style="padding:6rem 0;border-top:1px solid var(--border)">
+    <div class="section-container">
+        <div class="section-header reveal">
+            <div class="section-eyebrow">COMPARE</div>
+            <h2 class="section-title">FEATURE <span class="text-gradient">BREAKDOWN</span></h2>
         </div>
-        <div class="space-y-4" id="faq">
-            <div class="glass-card rounded-2xl overflow-hidden">
-                <button class="faq-q w-full text-left px-6 py-5 font-bold text-sm flex justify-between items-center" onclick="toggleFaq(this)">
-                    How do I purchase? <i class="fas fa-chevron-down text-purple-400 transition-transform duration-300"></i>
-                </button>
-                <div class="faq-a hidden px-6 pb-5 text-zinc-400 text-sm leading-relaxed">Click Purchase on any plan and you'll be directed to our Discord server. Our engineers handle all deployments personally to ensure the best configuration for your needs.</div>
-            </div>
-            <div class="glass-card rounded-2xl overflow-hidden">
-                <button class="faq-q w-full text-left px-6 py-5 font-bold text-sm flex justify-between items-center" onclick="toggleFaq(this)">
-                    Can I upgrade my plan later? <i class="fas fa-chevron-down text-purple-400 transition-transform duration-300"></i>
-                </button>
-                <div class="faq-a hidden px-6 pb-5 text-zinc-400 text-sm leading-relaxed">Yes! Reach out on Discord and we'll migrate your server to a higher tier with zero downtime. You only pay the difference.</div>
-            </div>
-            <div class="glass-card rounded-2xl overflow-hidden">
-                <button class="faq-q w-full text-left px-6 py-5 font-bold text-sm flex justify-between items-center" onclick="toggleFaq(this)">
-                    Why is the Standard plan Vanilla recommended? <i class="fas fa-chevron-down text-purple-400 transition-transform duration-300"></i>
-                </button>
-                <div class="faq-a hidden px-6 pb-5 text-zinc-400 text-sm leading-relaxed">With 3GB RAM and 65% CPU, the Standard plan is optimised for a clean Vanilla experience with 10&ndash;15 players. Modpacks, Forge, or Fabric servers may require more resources &mdash; upgrade to Pro or Premium for those.</div>
-            </div>
-            <div class="glass-card rounded-2xl overflow-hidden">
-                <button class="faq-q w-full text-left px-6 py-5 font-bold text-sm flex justify-between items-center" onclick="toggleFaq(this)">
-                    Are international prices accurate? <i class="fas fa-chevron-down text-purple-400 transition-transform duration-300"></i>
-                </button>
-                <div class="faq-a hidden px-6 pb-5 text-zinc-400 text-sm leading-relaxed">International prices are approximations for convenience. Billing is processed in INR at checkout. Exchange rates may vary slightly.</div>
-            </div>
-            <div class="glass-card rounded-2xl overflow-hidden">
-                <button class="faq-q w-full text-left px-6 py-5 font-bold text-sm flex justify-between items-center" onclick="toggleFaq(this)">
-                    What payment methods do you accept? <i class="fas fa-chevron-down text-purple-400 transition-transform duration-300"></i>
-                </button>
-                <div class="faq-a hidden px-6 pb-5 text-zinc-400 text-sm leading-relaxed">We accept UPI, bank transfers, and other methods arranged directly via Discord. Contact our team for details.</div>
-            </div>
-        </div>
-    </section>
 
-    <footer class="mt-8 border-t border-zinc-900/80 bg-black/50 py-16 px-6 backdrop-blur-xl reveal relative z-10">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10 text-center md:text-left">
-            <div>
-                <a href="index.html" class="logo-link mb-4 justify-center md:justify-start">
-                    <img src="ZQ_logo.png" alt="ZQ Logo" class="h-8 w-8 object-contain rounded-lg" onerror="this.style.display='none'" />
-                    <span class="brand text-xl font-black uppercase tracking-tight">ZQ<span class="text-purple-500">HOSTING</span></span>
+        <div class="reveal" style="overflow-x:auto">
+            <table style="width:100%;border-collapse:collapse;font-size:0.9rem">
+                <thead>
+                    <tr>
+                        <th style="text-align:left;padding:1rem 1.5rem;color:var(--text-mute);font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.15em;border-bottom:1px solid var(--border)">FEATURE</th>
+                        <th style="padding:1rem;text-align:center;font-family:var(--font-display);font-weight:700;letter-spacing:0.1em;border-bottom:1px solid var(--border)">STANDARD</th>
+                        <th style="padding:1rem;text-align:center;font-family:var(--font-display);font-weight:700;letter-spacing:0.1em;border-bottom:1px solid var(--border);color:var(--red)">PRO</th>
+                        <th style="padding:1rem;text-align:center;font-family:var(--font-display);font-weight:700;letter-spacing:0.1em;border-bottom:1px solid var(--border)">PREMIUM</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-row"><td class="table-feature">CPU Allocation</td><td class="table-cell">65%</td><td class="table-cell table-cell-featured">125%</td><td class="table-cell">185%</td></tr>
+                    <tr class="table-row"><td class="table-feature">RAM</td><td class="table-cell">3 GB</td><td class="table-cell table-cell-featured">6 GB</td><td class="table-cell">12 GB</td></tr>
+                    <tr class="table-row"><td class="table-feature">NVMe SSD Storage</td><td class="table-cell">10 GB</td><td class="table-cell table-cell-featured">25 GB</td><td class="table-cell">50 GB</td></tr>
+                    <tr class="table-row"><td class="table-feature">DDoS Protection</td><td class="table-cell">Basic</td><td class="table-cell table-cell-featured">Advanced</td><td class="table-cell">Advanced</td></tr>
+                    <tr class="table-row"><td class="table-feature">Managed Backups</td><td class="table-cell">1</td><td class="table-cell table-cell-featured">3</td><td class="table-cell">7</td></tr>
+                    <tr class="table-row"><td class="table-feature">Premium Plugins Kit</td><td class="table-cell"><i class="fas fa-times" style="color:var(--text-mute)"></i></td><td class="table-cell table-cell-featured"><i class="fas fa-check" style="color:var(--red)"></i></td><td class="table-cell"><i class="fas fa-check" style="color:var(--red)"></i></td></tr>
+                    <tr class="table-row"><td class="table-feature">Custom Domain</td><td class="table-cell"><i class="fas fa-times" style="color:var(--text-mute)"></i></td><td class="table-cell table-cell-featured"><i class="fas fa-times" style="color:var(--text-mute)"></i></td><td class="table-cell"><i class="fas fa-check" style="color:var(--red)"></i></td></tr>
+                    <tr class="table-row"><td class="table-feature">Pelican Panel</td><td class="table-cell"><i class="fas fa-check" style="color:var(--red)"></i></td><td class="table-cell table-cell-featured"><i class="fas fa-check" style="color:var(--red)"></i></td><td class="table-cell"><i class="fas fa-check" style="color:var(--red)"></i></td></tr>
+                    <tr class="table-row"><td class="table-feature">Uptime</td><td class="table-cell">99%</td><td class="table-cell table-cell-featured">99%</td><td class="table-cell">99%</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <div class="footer-glow"></div>
+    <div class="footer-inner">
+        <div class="footer-brand-col">
+            <a href="index.html" class="footer-logo">
+                <div class="logo-mark">
+                    <img src="ZQ_logo.png" alt="ZQ" onerror="this.parentElement.innerHTML='<span class=\'logo-zq\'>ZQ</span>'" />
+                </div>
+                <span class="footer-brand-text">ZQ<span class="logo-accent">HOSTING</span></span>
+            </a>
+            <p class="footer-tagline">Premium Minecraft hosting built for scale and speed across Asia.</p>
+            <div class="footer-socials">
+                <a href="https://dsc.gg/zqhosting" target="_blank" class="social-btn" title="Discord">
+                    <i class="fab fa-discord"></i>
                 </a>
-                <p class="text-zinc-500 text-sm max-w-xs leading-relaxed">Premium Minecraft hosting built for scale and speed across Asia.</p>
-                <p class="text-[10px] text-zinc-700 mt-4 font-bold uppercase tracking-widest">&copy; 2026 ZQ Hosting &middot; All Rights Reserved</p>
-            </div>
-            <div class="flex gap-12">
-                <div class="flex flex-col gap-3">
-                    <span class="text-white text-xs font-black uppercase tracking-widest">Navigate</span>
-                    <a href="index.html" class="text-zinc-500 text-sm hover:text-purple-400 transition">Home</a>
-                    <a href="pricing.html" class="text-zinc-500 text-sm hover:text-purple-400 transition">Pricing</a>
-                    <a href="index.html#features" class="text-zinc-500 text-sm hover:text-purple-400 transition">Features</a>
-                </div>
-                <div class="flex flex-col gap-3">
-                    <span class="text-white text-xs font-black uppercase tracking-widest">Support</span>
-                    <a href="https://panel.zqhost.qzz.io/login" target="_blank" class="text-zinc-500 text-sm hover:text-purple-400 transition">Panel Login</a>
-                    <a href="https://dsc.gg/zqhosting" target="_blank" class="text-zinc-500 text-sm hover:text-purple-400 transition">Discord</a>
-                </div>
             </div>
         </div>
-    </footer>
-
-    <div id="purchase-modal" class="modal-overlay" role="dialog" aria-modal="true">
-        <div class="modal-box text-center">
-            <button class="modal-close-btn" onclick="closeModal('purchase-modal')"><i class="fas fa-times text-sm"></i></button>
-            <div class="w-20 h-20 bg-purple-600/20 rounded-full flex items-center justify-center mx-auto mb-6"><i class="fab fa-discord text-purple-400 text-4xl"></i></div>
-            <h2 class="text-2xl font-black mb-3">Manual Deployment</h2>
-            <p class="text-zinc-400 text-sm mb-8 leading-relaxed max-w-sm mx-auto">Our engineers handle every deployment personally via Discord to guarantee optimal performance on our Asian nodes.</p>
-            <div class="flex flex-col gap-4">
-                <a href="https://dsc.gg/zqhosting" target="_blank" class="btn-premium py-4 rounded-xl font-black uppercase tracking-widest text-xs block"><i class="fab fa-discord mr-2"></i>Claim Your Node on Discord</a>
-                <button onclick="closeModal('purchase-modal')" class="py-4 text-zinc-500 font-bold hover:text-white transition text-sm">&larr; Back to site</button>
+        <div class="footer-links-col">
+            <div class="footer-col">
+                <div class="footer-col-title">PRODUCT</div>
+                <a href="pricing.html" class="footer-link">Pricing</a>
+                <a href="index.html#features" class="footer-link">Features</a>
+                <a href="https://panel.zqhost.qzz.io" target="_blank" class="footer-link">Panel Login</a>
+            </div>
+            <div class="footer-col">
+                <div class="footer-col-title">SUPPORT</div>
+                <a href="https://dsc.gg/zqhosting" target="_blank" class="footer-link">Discord</a>
+                <button onclick="openModal('kb-modal')" class="footer-link footer-link-btn">Documentation</button>
+            </div>
+            <div class="footer-col">
+                <div class="footer-col-title">LEGAL</div>
+                <button onclick="openModal('privacy-modal')" class="footer-link footer-link-btn">Privacy Policy</button>
+                <button onclick="openModal('tos-modal')" class="footer-link footer-link-btn">Terms of Service</button>
             </div>
         </div>
     </div>
+    <div class="footer-bottom">
+        <span>© 2026 ZQ Hosting · All Rights Reserved</span>
+        <span class="footer-bottom-right">Made with ⚡ for Asian gamers</span>
+    </div>
+</footer>
 
-    <script>
+<button id="back-to-top" aria-label="Back to top">
+    <i class="fas fa-chevron-up"></i>
+</button>
+
+<div id="purchase-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal('purchase-modal')" aria-label="Close"><i class="fas fa-times"></i></button>
+        <div class="modal-discord-icon"><i class="fab fa-discord"></i></div>
+        <h2 class="modal-title" style="text-align:center">Manual Deployment</h2>
+        <p class="modal-desc">To ensure the lowest possible ping on our Asian nodes and provide 1-on-1 hardware tuning, our engineers handle every deployment personally via Discord.</p>
+        <a href="https://dsc.gg/zqhosting" target="_blank" class="btn-primary w-full justify-center">
+            <i class="fab fa-discord"></i>
+            CLAIM YOUR NODE ON DISCORD
+            <span class="btn-shine"></span>
+        </a>
+        <button onclick="closeModal('purchase-modal')" class="modal-back">← Back to site</button>
+    </div>
+</div>
+
+<div id="privacy-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-box modal-box-lg">
+        <button class="modal-close" onclick="closeModal('privacy-modal')" aria-label="Close"><i class="fas fa-times"></i></button>
+        <div class="modal-header">
+            <div class="modal-header-icon"><i class="fas fa-lock"></i></div>
+            <div><h2 class="modal-title">Privacy Policy</h2><p class="modal-date">Effective: January 1, 2026</p></div>
+        </div>
+        <div class="modal-body">
+            <div class="modal-section"><h3>1. What We Collect</h3><p>When you purchase or use ZQ Hosting services, we may collect your Discord username, email address, payment details, server configuration preferences, and IP address for DDoS mitigation purposes only.</p></div>
+            <div class="modal-section"><h3>2. How We Use Your Data</h3><p>Your data is used exclusively to provision and maintain your server, communicate service updates, and resolve support tickets. We do not run ads. We do not sell your data. Ever.</p></div>
+            <div class="modal-section"><h3>3. Data Retention</h3><p>Account data is retained for as long as your subscription is active. Upon cancellation, data is purged within 30 days unless legally required to retain it.</p></div>
+            <div class="modal-section"><h3>4. Third Parties</h3><p>We use Pelican Panel for server management. No personal data is shared with advertisers or unrelated third parties.</p></div>
+            <div class="modal-section"><h3>5. Your Rights</h3><p>You may request access to, correction of, or deletion of your personal data at any time by contacting us on Discord. We will respond within 7 business days.</p></div>
+            <div class="modal-section"><h3>6. Contact</h3><p>For any privacy concerns, reach us via our <a href="https://dsc.gg/zqhosting" target="_blank">Discord server</a>.</p></div>
+        </div>
+        <button onclick="closeModal('privacy-modal')" class="btn-primary w-full justify-center mt-6">GOT IT<span class="btn-shine"></span></button>
+    </div>
+</div>
+
+<div id="tos-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-box modal-box-lg">
+        <button class="modal-close" onclick="closeModal('tos-modal')" aria-label="Close"><i class="fas fa-times"></i></button>
+        <div class="modal-header">
+            <div class="modal-header-icon"><i class="fas fa-file-contract"></i></div>
+            <div><h2 class="modal-title">Terms of Service</h2><p class="modal-date">Effective: January 1, 2026</p></div>
+        </div>
+        <div class="modal-body">
+            <div class="modal-section"><h3>1. Acceptance</h3><p>By purchasing or using any ZQ Hosting service, you agree to these Terms of Service in full. If you do not agree, you must not use our services.</p></div>
+            <div class="modal-section"><h3>2. Prohibited Use</h3><p>You may not use ZQ Hosting servers to conduct DDoS attacks, host illegal content, distribute malware, engage in cryptocurrency mining without prior written consent, or violate any applicable law.</p></div>
+            <div class="modal-section"><h3>3. Refund Policy</h3><p>Refunds are considered on a case-by-case basis within 48 hours of purchase. After a server has been provisioned, refunds are not guaranteed.</p></div>
+            <div class="modal-section"><h3>4. Uptime & SLA</h3><p>We target 99.9% monthly uptime. Scheduled maintenance windows are announced at least 24 hours in advance via Discord.</p></div>
+            <div class="modal-section"><h3>5. Account Termination</h3><p>ZQ Hosting reserves the right to suspend or terminate any account that violates these terms without prior notice.</p></div>
+            <div class="modal-section"><h3>6. Limitation of Liability</h3><p>ZQ Hosting is not liable for data loss, game world corruption, or any indirect damages. Always maintain your own backups.</p></div>
+        </div>
+        <button onclick="closeModal('tos-modal')" class="btn-primary w-full justify-center mt-6">I UNDERSTAND<span class="btn-shine"></span></button>
+    </div>
+</div>
+
+<div id="kb-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-box modal-box-lg">
+        <button class="modal-close" onclick="closeModal('kb-modal')" aria-label="Close"><i class="fas fa-times"></i></button>
+        <div class="modal-header">
+            <div class="modal-header-icon"><i class="fas fa-book"></i></div>
+            <div><h2 class="modal-title">Documentation</h2><p class="modal-date">Quick-start guides & resources</p></div>
+        </div>
+        <div class="modal-body">
+            <div class="docs-list">
+                <div class="docs-item"><div class="docs-item-icon"><i class="fas fa-play"></i></div><div><strong>Getting Started</strong><p>After purchase, our engineer will DM you on Discord to set up your node.</p></div></div>
+                <div class="docs-item"><div class="docs-item-icon"><i class="fas fa-terminal"></i></div><div><strong>Pelican Panel Access</strong><p>Log in at <a href="https://panel.zqhost.qzz.io" target="_blank">panel.zqhost.qzz.io</a> using credentials from our team.</p></div></div>
+                <div class="docs-item"><div class="docs-item-icon"><i class="fas fa-database"></i></div><div><strong>Backups</strong><p>Managed backups created automatically. Restore any from Pelican Panel with one click.</p></div></div>
+                <div class="docs-item"><div class="docs-item-icon"><i class="fas fa-plug"></i></div><div><strong>Plugin Installation</strong><p>Upload .jar files to <code>/plugins</code> via Pelican Panel and restart your server.</p></div></div>
+                <div class="docs-item"><div class="docs-item-icon"><i class="fas fa-headset"></i></div><div><strong>Support</strong><p>Open a ticket in our <a href="https://dsc.gg/zqhosting" target="_blank">Discord server</a>. Our team responds within a few hours.</p></div></div>
+            </div>
+        </div>
+        <a href="https://dsc.gg/zqhosting" target="_blank" class="btn-primary w-full justify-center mt-6">
+            <i class="fab fa-discord"></i> GET HELP ON DISCORD <span class="btn-shine"></span>
+        </a>
+    </div>
+</div>
+
+<style>
+.table-row { border-bottom: 1px solid var(--border); }
+.table-row:hover { background: rgba(255,255,255,0.02); }
+.table-feature {
+    padding: 1rem 1.5rem;
+    color: var(--text-dim);
+    font-size: 0.88rem;
+}
+.table-cell {
+    padding: 1rem;
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--text-dim);
+}
+.table-cell-featured { color: var(--text); }
+</style>
+
+<script src="js/main.js"></script>
+<script>
     const CURRENCIES = {
-        INR: { sym:'\u20B9', rate:1,    markup:1,    decimals:0, note:'Showing prices in INR' },
-        USD: { sym:'$',      rate:83,   markup:1.32, decimals:2, note:'International prices shown at 30% premium. Billed in INR.' },
-        EUR: { sym:'\u20AC', rate:90,   markup:1.30, decimals:2, note:'International prices shown at 30% premium. Billed in INR.' },
-        GBP: { sym:'\u00A3', rate:105,  markup:1.35, decimals:2, note:'International prices shown at 35% premium. Billed in INR.' },
-        AED: { sym:'\u062F.\u0625', rate:22.6, markup:1.28, decimals:1, note:'International prices shown at 28% premium. Billed in INR.' },
-        SGD: { sym:'S$',     rate:62,   markup:1.30, decimals:2, note:'International prices shown at 30% premium. Billed in INR.' },
-        AUD: { sym:'A$',     rate:54,   markup:1.32, decimals:2, note:'International prices shown at 32% premium. Billed in INR.' },
+        INR: { sym:'₹', rate:1,    markup:1,    decimals:0, note:'Showing prices in INR' },
+        USD: { sym:'$',    rate:83,   markup:1.32, decimals:2, note:'International prices shown at 32% premium. Billed in INR.' },
+        EUR: { sym:'€', rate:90,   markup:1.30, decimals:2, note:'International prices shown at 30% premium. Billed in INR.' },
+        GBP: { sym:'£', rate:105,  markup:1.35, decimals:2, note:'International prices shown at 35% premium. Billed in INR.' },
+        AED: { sym:'د.إ', rate:22.6, markup:1.28, decimals:1, note:'International prices shown at 28% premium. Billed in INR.' },
+        SGD: { sym:'S$',   rate:62,   markup:1.30, decimals:2, note:'International prices shown at 30% premium. Billed in INR.' },
+        AUD: { sym:'A$',   rate:54,   markup:1.32, decimals:2, note:'International prices shown at 32% premium. Billed in INR.' },
     };
 
     const PLANS_INR = {
@@ -426,14 +512,15 @@
         const durMeta = DURATIONS[dur];
 
         ['standard','pro','premium'].forEach(function(plan) {
-            var inrPrice = PLANS_INR[plan][dur];
-            var converted = convertPrice(inrPrice, ccy);
-            var formatted = formatPrice(converted, ccy);
+            const inrPrice = PLANS_INR[plan][dur];
+            const converted = convertPrice(inrPrice, ccy);
+            const formatted = formatPrice(converted, ccy);
 
-            var priceEl = document.getElementById('price-' + plan);
-            var periodEl = document.getElementById('period-' + plan);
-            var perdayEl = document.getElementById('perday-' + plan);
-            var savingsEl = document.getElementById('savings-' + plan);
+            const priceEl = document.getElementById('price-' + plan);
+            const periodEl = document.getElementById('period-' + plan);
+            const perdayEl = document.getElementById('perday-' + plan);
+            const savingsEl = document.getElementById('savings-' + plan);
+            const origEl = document.querySelector('.price-orig-' + plan);
 
             if (priceEl) {
                 priceEl.textContent = formatted;
@@ -442,17 +529,18 @@
                 priceEl.classList.add('price-change');
             }
             if (periodEl) periodEl.textContent = durMeta.label;
+            if (origEl) origEl.textContent = formatPrice(convertPrice(SLASHED_INR[plan], ccy), ccy);
 
             if (perdayEl) {
-                var perDayInr = inrPrice / durMeta.days;
-                perdayEl.textContent = '\u2248 ' + formatPrice(convertPrice(perDayInr, ccy), ccy) + '/day';
+                const perDayInr = inrPrice / durMeta.days;
+                perdayEl.textContent = '≈ ' + formatPrice(convertPrice(perDayInr, ccy), ccy) + '/day';
             }
 
             if (savingsEl) {
-                var moInr = PLANS_INR[plan]['mo'];
-                var moEquivTotal = (moInr / 30) * durMeta.days;
+                const moInr = PLANS_INR[plan]['mo'];
+                const moEquivTotal = (moInr / 30) * durMeta.days;
                 if (dur !== '1w' && dur !== '2w' && dur !== 'mo' && inrPrice < moEquivTotal) {
-                    var pct = Math.round(((moEquivTotal - inrPrice) / moEquivTotal) * 100);
+                    const pct = Math.round(((moEquivTotal - inrPrice) / moEquivTotal) * 100);
                     savingsEl.textContent = 'Save ' + pct + '%';
                     savingsEl.style.display = 'inline-flex';
                 } else {
@@ -461,134 +549,34 @@
             }
         });
 
-        document.querySelectorAll('.addon-price').forEach(function(el) {
+        document.querySelectorAll('.addon-price-el').forEach(function(el) {
             el.textContent = formatPrice(convertPrice(parseFloat(el.dataset.inr), ccy), ccy);
-        });
-
-        ['standard','pro','premium'].forEach(function(k) {
-            var el = document.querySelector('.price-orig-' + k);
-            if (el) el.textContent = formatPrice(convertPrice(SLASHED_INR[k], ccy), ccy);
         });
 
         document.getElementById('currency-note').textContent = CURRENCIES[ccy].note;
         document.getElementById('fx-note').style.display = ccy === 'INR' ? 'none' : 'block';
-
-        document.querySelectorAll('.currency-btn').forEach(function(btn) {
-            var fnStr = btn.getAttribute('onclick') || '';
-            btn.classList.toggle('active', fnStr.indexOf("'" + ccy + "'") !== -1);
-        });
     }
 
     function setCurrency(ccy) {
         activeCurrency = ccy;
+        document.querySelectorAll('.cur-btn').forEach(btn => {
+            const onClick = btn.getAttribute('onclick');
+            btn.classList.toggle('active', onClick && onClick.includes("'"+ccy+"'"));
+        });
         updatePricing();
     }
 
     function setDuration(dur) {
         activeDuration = dur;
-        document.querySelectorAll('.dur-btn').forEach(function(btn) {
+        document.querySelectorAll('.dur-btn').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.dur === dur);
         });
         updatePricing();
     }
 
-    function toggleFaq(btn) {
-        var ans = btn.nextElementSibling;
-        var icon = btn.querySelector('i');
-        var isOpen = !ans.classList.contains('hidden');
-        document.querySelectorAll('.faq-a').forEach(function(a) { a.classList.add('hidden'); });
-        document.querySelectorAll('.faq-q i').forEach(function(i) { i.style.transform = ''; });
-        if (!isOpen) {
-            ans.classList.remove('hidden');
-            icon.style.transform = 'rotate(180deg)';
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', () => {
         updatePricing();
-        document.querySelectorAll('.reveal,.stagger-children').forEach(function(el) { ro.observe(el); });
     });
-
-    var glow = document.getElementById('cursor-glow');
-    document.addEventListener('mousemove', function(e) {
-        glow.style.left = e.clientX + 'px';
-        glow.style.top = e.clientY + 'px';
-        glow.style.opacity = '1';
-    });
-
-    window.addEventListener('scroll', function() {
-        var el = document.documentElement;
-        document.getElementById('scroll-progress').style.width = (el.scrollTop / (el.scrollHeight - el.clientHeight) * 100) + '%';
-        document.getElementById('backToTop').classList.toggle('show', el.scrollTop > 350);
-        document.querySelector('nav').style.background = el.scrollTop > 60 ? 'rgba(4,4,7,0.97)' : 'rgba(4,4,7,0.75)';
-    });
-
-    var ro = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-            if (e.isIntersecting) { e.target.classList.add('active'); ro.unobserve(e.target); }
-        });
-    }, { threshold: 0.07 });
-
-    var currentModal = null;
-    function openModal(id) {
-        if (currentModal) closeModal(currentModal);
-        document.getElementById(id).classList.add('open');
-        document.body.style.overflow = 'hidden';
-        currentModal = id;
-    }
-    function closeModal(id) {
-        document.getElementById(id).classList.remove('open');
-        document.body.style.overflow = '';
-        currentModal = null;
-    }
-    document.querySelectorAll('.modal-overlay').forEach(function(o) {
-        o.addEventListener('click', function(e) { if (e.target === o) closeModal(o.id); });
-    });
-    document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && currentModal) closeModal(currentModal); });
-
-    document.querySelectorAll('.glass-card').forEach(function(card) {
-        card.addEventListener('mousemove', function(e) {
-            var r = card.getBoundingClientRect();
-            card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
-            card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
-        });
-    });
-
-    (function() {
-        var canvas = document.getElementById('particle-canvas'), ctx = canvas.getContext('2d');
-        var W, H, particles = [];
-        function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-        resize(); window.addEventListener('resize', resize);
-        function rand(a, b) { return Math.random() * (b - a) + a; }
-        function P() { this.x = rand(0,W); this.y = rand(0,H); this.r = rand(0.5,1.8); this.vx = rand(-0.15,0.15); this.vy = rand(-0.3,-0.08); this.alpha = rand(0.1,0.5); this.color = Math.random() > 0.6 ? '168,85,247' : '255,255,255'; }
-        for (var i = 0; i < 100; i++) particles.push(new P());
-        function draw() {
-            ctx.clearRect(0, 0, W, H);
-            particles.forEach(function(p) {
-                ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(' + p.color + ',' + p.alpha + ')'; ctx.fill();
-                p.x += p.vx; p.y += p.vy;
-                if (p.y < -5 || p.x < -5 || p.x > W + 5) { p.x = rand(0, W); p.y = H + 5; }
-            });
-            requestAnimationFrame(draw);
-        }
-        draw();
-    })();
-
-    document.querySelectorAll('.btn-premium').forEach(function(btn) {
-        btn.addEventListener('click', function(e) {
-            var r = document.createElement('span'),
-                size = Math.max(this.offsetWidth, this.offsetHeight),
-                rect = this.getBoundingClientRect();
-            r.style.cssText = 'position:absolute;border-radius:50%;width:' + size + 'px;height:' + size + 'px;left:' + (e.clientX - rect.left - size / 2) + 'px;top:' + (e.clientY - rect.top - size / 2) + 'px;background:rgba(255,255,255,0.25);transform:scale(0);pointer-events:none;animation:ripple 0.55s ease-out forwards;';
-            if (!document.querySelector('#ripple-style')) {
-                var s = document.createElement('style'); s.id = 'ripple-style';
-                s.textContent = '@keyframes ripple{to{transform:scale(2.5);opacity:0}}';
-                document.head.appendChild(s);
-            }
-            this.style.position = 'relative'; this.appendChild(r); setTimeout(function() { r.remove(); }, 600);
-        });
-    });
-    </script>
+</script>
 </body>
 </html>
