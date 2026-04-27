@@ -18,7 +18,7 @@ export default function GameServersPage() {
             Game Servers
           </h1>
           <p className="text-text-secondary text-xl max-w-2xl mx-auto mb-12">
-            We're building the ultimate high-performance hosting platform for Rust, Palworld, ARK, CS2, and more. 
+            We&apos;re building the ultimate high-performance hosting platform for Rust, Palworld, ARK, CS2, and more. 
             Expect blazing fast NVMe storage and zero lag.
           </p>
 

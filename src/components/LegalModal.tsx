@@ -14,7 +14,7 @@ const content = {
       <div className="space-y-6 text-sm text-text-secondary">
         <div>
           <h3 className="text-white font-semibold mb-2">1. Agreement to Terms</h3>
-          <p>By accessing or using ZQ Hosting's services, you agree to be bound by these Terms of Service. If you disagree with any part of the terms, you may not access our services.</p>
+          <p>By accessing or using ZQ Hosting&apos;s services, you agree to be bound by these Terms of Service. If you disagree with any part of the terms, you may not access our services.</p>
         </div>
         <div>
           <h3 className="text-white font-semibold mb-2">2. Acceptable Use Policy</h3>
