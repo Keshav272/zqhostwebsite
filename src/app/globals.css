@@ -1,0 +1,295 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-primary: #000000;
+  --color-bg-secondary: #050505;
+  --color-bg-card: #0a0a0a;
+  --color-bg-card-hover: #121212;
+  --color-bg-glass: rgba(10, 10, 10, 0.7);
+  --color-bg-glass-strong: rgba(10, 10, 10, 0.85);
+  --color-border-glass: rgba(255, 255, 255, 0.1);
+  --color-border-dim: rgba(255, 255, 255, 0.05);
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-electric: #0ea5e9; /* Electric Sky Blue */
+  --color-electric-light: #38bdf8;
+  --color-electric-dark: #0284c7;
+  --color-electric-glow: rgba(14, 165, 233, 0.25);
+  --color-cyan: #3b82f6; /* Vibrant Blue */
+  --color-cyan-glow: rgba(59, 130, 246, 0.2);
+  --color-purple: #8b5cf6; 
+  --color-purple-glow: rgba(139, 92, 246, 0.15);
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #a1a1aa;
+  --color-text-muted: #71717a;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
+  }
+
+  body {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    line-height: 1.7;
+    /* Static background removed, interactive canvas will handle it */
+  }
+
+  ::selection {
+    background-color: var(--color-electric);
+    color: white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg-primary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    border: 2px solid var(--color-bg-primary);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Sleek horizontal scrollbar for pricing cards */
+  .custom-scrollbar::-webkit-scrollbar {
+    height: 8px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 4px;
+    margin: 0 2rem;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--color-electric-glow);
+    border-radius: 4px;
+    border: none;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--color-electric);
+  }
+}
+
+@layer components {
+  .glass {
+    background: var(--color-bg-glass-strong);
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    border: 1px solid var(--color-border-glass);
+    will-change: transform, opacity;
+  }
+
+  .glass-subtle {
+    background: rgba(5, 5, 5, 0.5);
+    backdrop-filter: blur(16px) saturate(1.2);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    border: 1px solid var(--color-border-subtle);
+  }
+
+  .glass-card {
+    background: linear-gradient(
+      135deg,
+      rgba(20, 20, 20, 0.6) 0%,
+      rgba(5, 5, 5, 0.4) 100%
+    );
+    backdrop-filter: blur(20px) saturate(1.3);
+    -webkit-backdrop-filter: blur(20px) saturate(1.3);
+    border: 1px solid var(--color-border-subtle);
+  }
+
+  .glow-blue {
+    box-shadow: 0 0 30px var(--color-electric-glow),
+                0 0 80px rgba(255, 255, 255, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .glow-text {
+    text-shadow: 0 0 40px var(--color-electric-glow),
+                 0 0 80px rgba(255, 255, 255, 0.15);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--color-electric-light) 0%, var(--color-cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-alt {
+    background: linear-gradient(135deg, var(--color-electric-light) 0%, var(--color-purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-text-warm {
+    background: linear-gradient(135deg, var(--color-cyan) 0%, var(--color-electric) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% center; }
+    100% { background-position: -200% center; }
+  }
+  
+  .animate-shimmer-text {
+    background: linear-gradient(
+      120deg,
+      var(--color-text-primary) 0%,
+      var(--color-text-primary) 40%,
+      var(--color-electric) 50%,
+      var(--color-cyan) 55%,
+      var(--color-text-primary) 65%,
+      var(--color-text-primary) 100%
+    );
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: shimmer 10s linear infinite;
+    padding-bottom: 0.15em;
+    margin-bottom: -0.15em;
+    display: inline-block;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--color-electric) 0%, var(--color-electric-dark) 100%);
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 1rem;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(14, 165, 233, 0.4);
+    box-shadow: 0 4px 20px rgba(14, 165, 233, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    will-change: transform;
+    z-index: 1; /* Fix text hiding on hover */
+  }
+
+  .btn-primary::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--color-electric-light) 0%, var(--color-electric) 100%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: -1; /* Placed behind text */
+  }
+
+  .btn-primary:hover::before {
+    opacity: 1;
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 0 30px var(--color-electric-glow),
+                0 0 60px rgba(14, 165, 233, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    border-color: rgba(14, 165, 233, 0.6);
+  }
+
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--color-text-primary);
+    padding: 1rem 2.5rem;
+    border-radius: 1rem;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+    border: 1px solid var(--color-border-dim);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    will-change: transform;
+  }
+
+  .btn-secondary:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+  }
+
+  .card-hover {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    will-change: transform;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-border-glass);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4), inset 0 0 0 1px var(--color-border-glass);
+  }
+
+  .grid-pattern {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  .radial-glow {
+    background: radial-gradient(
+      ellipse 90% 60% at 50% -10%,
+      rgba(255, 255, 255, 0.05),
+      transparent
+    );
+  }
+
+  .radial-glow-center {
+    background: radial-gradient(
+      ellipse 60% 40% at 50% 50%,
+      rgba(255, 255, 255, 0.05),
+      transparent
+    );
+  }
+
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--color-border-dim) 20%,
+      rgba(255, 255, 255, 0.15) 50%,
+      var(--color-border-dim) 80%,
+      transparent 100%
+    );
+    opacity: 0.5;
+  }
+}

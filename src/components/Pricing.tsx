@@ -1,0 +1,570 @@
+"use client";
+
+import { motion, useInView } from "framer-motion";
+import { useRef, useState } from "react";
+import { MagneticButton } from "./Navbar";
+
+type Currency = "INR" | "USD" | "EUR" | "GBP" | "AUD" | "SGD" | "CAD";
+type BillingCycle = "weekly" | "biweekly" | "monthly" | "3month" | "6month" | "yearly";
+
+const currencyConfig: Record<Currency, { flag: string; symbol: string; label: string; rate: number }> = {
+  INR: { flag: "🇮🇳", symbol: "₹", label: "INR", rate: 1 },
+  USD: { flag: "🇺🇸", symbol: "$", label: "USD", rate: 1 / 83 * 1.2 },
+  EUR: { flag: "🇪🇺", symbol: "€", label: "EUR", rate: 1 / 90 * 1.2 },
+  GBP: { flag: "🇬🇧", symbol: "£", label: "GBP", rate: 1 / 105 * 1.2 },
+  AUD: { flag: "🇦🇺", symbol: "A$", label: "AUD", rate: 1 / 55 * 1.2 },
+  SGD: { flag: "🇸🇬", symbol: "S$", label: "SGD", rate: 1 / 62 * 1.2 },
+  CAD: { flag: "🇨🇦", symbol: "C$", label: "CAD", rate: 1 / 60 * 1.2 },
+};
+
+const billingLabels: Record<BillingCycle, string> = {
+  weekly: "Weekly",
+  biweekly: "Bi-Weekly",
+  monthly: "Monthly",
+  "3month": "3 Month",
+  "6month": "6 Month",
+  yearly: "Yearly",
+};
+
+const billingMultipliers: Record<BillingCycle, number> = {
+  weekly: 0.3,
+  biweekly: 0.55,
+  monthly: 1,
+  "3month": 2.7,
+  "6month": 5,
+  yearly: 9,
+};
+
+const vpsPlans: Plan[] = [
+  {
+    name: "Starter VPS",
+    tagline: "Perfect for small projects",
+    specs: ["2 vCPU Cores", "4 GB DDR4 RAM", "40 GB NVMe SSD", "1 TB Bandwidth", "1 IPv4 Address"],
+    basePrice: 249,
+    popular: false,
+  },
+  {
+    name: "Pro VPS",
+    tagline: "Best value for growing apps",
+    specs: ["4 vCPU Cores", "8 GB DDR4 RAM", "100 GB NVMe SSD", "2 TB Bandwidth", "1 IPv4 Address", "DDoS Protection"],
+    basePrice: 499,
+    popular: true,
+  },
+  {
+    name: "Enterprise VPS",
+    tagline: "For demanding workloads",
+    specs: ["8 vCPU Cores", "16 GB DDR4 RAM", "200 GB NVMe SSD", "Unmetered Bandwidth", "2 IPv4 Addresses", "Priority Support"],
+    basePrice: 999,
+    popular: false,
+  },
+];
+
+/* ---- Minecraft Plans ---- */
+const mcPlans: Plan[] = [
+  {
+    name: "Free Tier",
+    tagline: "Start playing instantly",
+    specs: [
+      "2 GB RAM",
+      "5 GB NVMe Storage",
+      "10 Recommended Players",
+      "Basic Plugins",
+      "Shared CPU",
+      "Community Support",
+    ],
+    basePrice: 0,
+    popular: false,
+    badge: "FREE FOREVER",
+    note: "Upgrade with invites — 1 GB RAM per 2 invites, +100% CPU at 10 invites",
+  },
+  {
+    name: "Essentials",
+    tagline: "For growing communities",
+    specs: ["4 GB RAM", "25 Recommended Players", "Unlimited Plugins", "Dedicated vCPU", "Priority Support"],
+    basePrice: 149,
+    popular: false,
+  },
+  {
+    name: "Pro Server",
+    tagline: "Run massive modded worlds",
+    specs: ["8 GB RAM", "50+ Recommended Players", "Unlimited Mods", "Dedicated CPU Cores", "Auto Backups", "Custom Subdomain"],
+    basePrice: 349,
+    popular: true,
+  },
+  {
+    name: "Advanced Server",
+    tagline: "High-performance network",
+    specs: ["12 GB RAM", "100+ Recommended Players", "Heavy Modpacks", "8 Dedicated Cores", "DDoS Protection", "Custom Subdomain"],
+    basePrice: 599,
+    popular: false,
+  },
+  {
+    name: "Extreme Server",
+    tagline: "Unmatched pure power",
+    specs: ["32 GB RAM", "Unlimited Players", "Extreme Modpacks", "16 Dedicated Cores", "Priority Node", "Custom Subdomain"],
+    basePrice: 1299,
+    popular: false,
+  },
+];
+
+/* ---- Dedicated Plans ---- */
+const dedicatedPlans: Plan[] = [
+  {
+    name: "Starter Bare Metal",
+    tagline: "Entry-level dedicated power",
+    specs: ["Intel Xeon E-2236", "32 GB DDR4 ECC", "500 GB NVMe SSD", "10 TB Bandwidth", "Full Root Access"],
+    basePrice: 7999,
+    popular: false,
+  },
+  {
+    name: "Performance",
+    tagline: "Maximum raw throughput",
+    specs: ["AMD EPYC 7443P", "64 GB DDR4 ECC", "1 TB NVMe RAID-1", "Unmetered Bandwidth", "DDoS Protection", "IPMI Access"],
+    basePrice: 16999,
+    popular: true,
+  },
+  {
+    name: "On-Demand Custom",
+    tagline: "Tailored to your exact needs",
+    specs: ["Custom CPU Config", "Up to 512 GB RAM", "Multi-NVMe RAID", "Unmetered Bandwidth", "Managed Support", "Custom Networking"],
+    basePrice: 0,
+    popular: false,
+    badge: "CONTACT US",
+    note: "Custom quote based on your requirements",
+  },
+];
+
+interface Plan {
+  name: string;
+  tagline: string;
+  specs: string[];
+  basePrice: number;
+  popular: boolean;
+  badge?: string;
+  note?: string;
+}
+
+function formatPrice(baseINR: number, currency: Currency, cycle: BillingCycle): string {
+  if (baseINR === 0) return "Free";
+  const cfg = currencyConfig[currency];
+  const converted = baseINR * cfg.rate * billingMultipliers[cycle];
+  const rounded = Math.round(converted * 100) / 100;
+
+  if (currency === "INR") {
+    return `${cfg.symbol}${Math.round(rounded).toLocaleString("en-IN")}`;
+  }
+  return `${cfg.symbol}${rounded.toFixed(2)}`;
+}
+
+function getCycleLabel(cycle: BillingCycle): string {
+  const labels: Record<BillingCycle, string> = {
+    weekly: "/week",
+    biweekly: "/2 wks",
+    monthly: "/mo",
+    "3month": "/3 mo",
+    "6month": "/6 mo",
+    yearly: "/yr",
+  };
+  return labels[cycle];
+}
+
+// Note: Need to import OrderModal
+import OrderModal from "./OrderModal";
+
+export default function Pricing() {
+  const [currency, setCurrency] = useState<Currency>("INR");
+  const [billing, setBilling] = useState<BillingCycle>("monthly");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-60px" });
+
+  const handleOrder = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsModalOpen(true);
+  };
+
+  return (
+    <>
+      <OrderModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <section id="pricing" className="relative pt-24 pb-40 overflow-hidden">
+        <div className="absolute inset-0 grid-pattern opacity-30" />
+        <div className="absolute inset-0 radial-glow" />
+
+        <div className="relative z-10 max-w-[1440px] mx-auto px-8">
+          {/* Header */}
+          <motion.div
+            ref={ref}
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="text-center mb-24 relative"
+          >
+            {/* Decorative glow behind header */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg h-32 bg-electric/10 blur-[100px] rounded-full pointer-events-none" />
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="inline-flex items-center gap-3 mb-8 px-6 py-2.5 rounded-full border border-electric/20 bg-electric/5 backdrop-blur-md"
+            >
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-electric opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-electric" />
+              </span>
+              <span className="text-sm font-bold text-electric tracking-[0.2em] uppercase">
+                Choose Your Power
+              </span>
+            </motion.div>
+
+            <h2 className="text-6xl sm:text-7xl lg:text-8xl font-black mb-8 tracking-tighter leading-tight relative z-10">
+              Unbeatable <span className="gradient-text glow-text">Performance</span>.
+              <br />
+              Honest Pricing.
+            </h2>
+            <p className="text-text-secondary text-xl sm:text-2xl max-w-2xl mx-auto leading-relaxed font-light relative z-10">
+              No hidden fees, no surprises. Deploy your servers on premium enterprise hardware and scale as you grow.
+            </p>
+          </motion.div>
+
+          {/* Controls */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="flex flex-col items-center gap-5 mb-20"
+          >
+            {/* Currency Toggle */}
+            <div>
+              <p className="text-xs text-text-muted text-center mb-2 font-medium uppercase tracking-widest">Currency</p>
+              <div className="glass-card rounded-2xl p-1.5 inline-flex items-center flex-wrap justify-center gap-0.5">
+                {(Object.keys(currencyConfig) as Currency[]).map((c) => (
+                  <button
+                    key={c}
+                    onClick={() => setCurrency(c)}
+                    className={`relative px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ${
+                      currency === c
+                        ? "text-white"
+                        : "text-text-muted hover:text-text-secondary"
+                    }`}
+                  >
+                    {currency === c && (
+                      <motion.div
+                        layoutId="currency-bg"
+                        className="absolute inset-0 bg-gradient-to-r from-electric to-electric-dark rounded-xl shadow-lg shadow-electric/20"
+                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                      />
+                    )}
+                    <span className="relative z-10 flex items-center gap-1.5">
+                      <span>{currencyConfig[c].flag}</span>
+                      <span>{currencyConfig[c].label}</span>
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Billing Cycle */}
+            <div>
+              <p className="text-xs text-text-muted text-center mb-2 font-medium uppercase tracking-widest">Billing Cycle</p>
+              <div className="glass-card rounded-2xl p-1.5 inline-flex items-center flex-wrap justify-center gap-0.5">
+                {(Object.keys(billingLabels) as BillingCycle[]).map((b) => (
+                  <button
+                    key={b}
+                    onClick={() => setBilling(b)}
+                    className={`relative px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ${
+                      billing === b
+                        ? "text-white"
+                        : "text-text-muted hover:text-text-secondary"
+                    }`}
+                  >
+                    {billing === b && (
+                      <motion.div
+                        layoutId="billing-bg"
+                        className="absolute inset-0 bg-gradient-to-r from-electric to-electric-dark rounded-xl shadow-lg shadow-electric/20"
+                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                      />
+                    )}
+                    <span className="relative z-10">{billingLabels[b]}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3 flex-wrap justify-center">
+              {billing === "yearly" && (
+                <motion.span
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-sm font-semibold text-success bg-success/10 px-4 py-1.5 rounded-full border border-success/20"
+                >
+                  🎉 Save up to 25% with yearly billing!
+                </motion.span>
+              )}
+              {currency !== "INR" && (
+                <motion.span
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-xs text-text-muted bg-bg-card/60 px-3 py-1.5 rounded-full border border-border-dim"
+                >
+                  International pricing includes 20% service fee
+                </motion.span>
+              )}
+            </div>
+          </motion.div>
+
+          {/* VPS Section */}
+          <PricingCategory
+            icon="⚡"
+            title="VPS / VDS Hosting"
+            subtitle="High-performance virtual private servers with blazing-fast NVMe storage"
+            plans={vpsPlans}
+            currency={currency}
+            billing={billing}
+            isInView={isInView}
+            delay={0.2}
+            onOrder={handleOrder}
+          />
+
+          <div className="section-divider my-24" />
+
+          {/* Minecraft Section */}
+          <div>
+            <PricingCategory
+              icon="🎮"
+              title="Minecraft Hosting"
+              subtitle="Optimized game servers with one-click mod installation and instant setup"
+              plans={mcPlans}
+              currency={currency}
+              billing={billing}
+              isInView={isInView}
+              delay={0.3}
+              onOrder={handleOrder}
+            />
+            {/* Custom plan banner for MC */}
+            <div className="mt-12 text-center">
+              <a 
+                href="#" 
+                onClick={handleOrder}
+                className="inline-flex items-center gap-3 text-electric hover:text-electric-light transition-colors font-medium border border-electric/20 rounded-xl px-6 py-3 bg-electric/5 hover:bg-electric/10"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                </svg>
+                Need more power? Contact us on Discord for a custom plan!
+              </a>
+            </div>
+          </div>
+
+          <div className="section-divider my-24" />
+
+          {/* Dedicated Section */}
+          <PricingCategory
+            icon="🖥️"
+            title="Dedicated Servers"
+            subtitle="On-demand high-performance bare metal hardware for maximum power"
+            plans={dedicatedPlans}
+            currency={currency}
+            billing={billing}
+            isInView={isInView}
+            delay={0.4}
+            onOrder={handleOrder}
+          />
+
+          {/* Power-Ups Section */}
+          <div className="section-divider my-24" />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6 }}
+            className="max-w-5xl mx-auto mb-10"
+          >
+            <div className="text-center mb-12">
+              <span className="text-xs font-bold text-electric tracking-[0.2em] uppercase mb-4 block">CUSTOMISE</span>
+              <h3 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Power-Ups & Add-ons</h3>
+              <p className="text-text-secondary text-lg">Bolt-on exactly what you need. All add-ons are billed monthly alongside your plan.</p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-5">
+              {[
+                { name: "Extra RAM", desc: "Boost performance for modpacks & large player counts", price: 49, unit: "per GB / mo", icon: "💾" },
+                { name: "Extra Port", desc: "Run multiple services — proxy, dynmap, SFTP, etc.", price: 29, unit: "per port / mo", icon: "🔌" },
+                { name: "Extra Storage", desc: "More NVMe SSD space for large worlds & mods", price: 29, unit: "per GB / mo", icon: "💽" },
+                { name: "Additional Backups", desc: "Extra managed snapshots beyond your plan's included count", price: 19, unit: "per backup slot / mo", icon: "☁️" },
+              ].map((pu, i) => (
+                <motion.div
+                  key={pu.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.1 * i }}
+                  className="glass-card rounded-2xl p-6 flex items-center justify-between gap-4 card-hover border border-border-dim hover:border-electric/30"
+                >
+                  <div className="flex items-center gap-5">
+                    <div className="w-12 h-12 rounded-xl bg-electric/10 flex items-center justify-center text-2xl flex-shrink-0">
+                      {pu.icon}
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-bold text-text-primary leading-tight mb-1">{pu.name}</h4>
+                      <p className="text-sm text-text-muted leading-snug">{pu.desc}</p>
+                    </div>
+                  </div>
+                  <div className="text-right shrink-0 ml-4">
+                    <div className="text-2xl font-bold text-text-primary flex items-baseline justify-end">
+                      <span className="text-electric">{currencyConfig[currency].symbol}</span>
+                      {Math.round(pu.price * currencyConfig[currency].rate)}
+                    </div>
+                    <div className="text-[11px] text-text-muted font-medium">{pu.unit}</div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function PricingCategory({
+  icon,
+  title,
+  subtitle,
+  plans,
+  currency,
+  billing,
+  isInView,
+  delay,
+  onOrder,
+}: {
+  icon: string;
+  title: string;
+  subtitle: string;
+  plans: Plan[];
+  currency: Currency;
+  billing: BillingCycle;
+  isInView: boolean;
+  delay: number;
+  onOrder: (e: React.MouseEvent) => void;
+}) {
+  return (
+    <div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, delay }}
+        className="mb-16"
+      >
+        <div className="flex items-center gap-4 mb-4">
+          <span className="text-4xl">{icon}</span>
+          <h3 className="text-4xl sm:text-5xl font-bold tracking-tight">{title}</h3>
+        </div>
+        <p className="text-text-secondary text-xl ml-[60px]">{subtitle}</p>
+      </motion.div>
+
+      <div className="flex flex-wrap justify-center gap-8 xl:gap-10">
+        {plans.map((plan, i) => (
+          <motion.div
+            key={plan.name}
+            initial={{ opacity: 0, y: 50 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{
+              duration: 0.7,
+              delay: delay + 0.12 * i,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.33rem)] max-w-[420px] flex"
+          >
+            <div
+              className={`relative glass-card rounded-[2rem] p-8 xl:p-10 w-full card-hover flex flex-col ${
+                plan.popular
+                  ? "border-electric/40 shadow-2xl shadow-electric/10 ring-2 ring-electric/20 scale-[1.02] md:scale-105 z-10"
+                  : ""
+              }`}
+            >
+              {/* Badge */}
+              {plan.popular && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
+                  <span className="bg-gradient-to-r from-electric to-cyan text-white text-xs font-bold px-6 py-2 rounded-full uppercase tracking-widest shadow-lg shadow-electric/30 whitespace-nowrap">
+                    Most Popular
+                  </span>
+                </div>
+              )}
+              {plan.badge && !plan.popular && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
+                  <span className={`text-white text-xs font-bold px-6 py-2 rounded-full uppercase tracking-widest shadow-lg whitespace-nowrap ${
+                    plan.badge === "FREE FOREVER"
+                      ? "bg-gradient-to-r from-success to-emerald-400 shadow-success/30"
+                      : "bg-gradient-to-r from-warning to-amber-400 shadow-warning/30"
+                  }`}>
+                    {plan.badge}
+                  </span>
+                </div>
+              )}
+
+              {/* Name + Tagline */}
+              <div className="mb-6 pt-2">
+                <h4 className="text-2xl font-bold tracking-tight">{plan.name}</h4>
+                <p className="text-sm text-text-muted mt-1.5">{plan.tagline}</p>
+              </div>
+
+              {/* Price Block — fixed height for alignment */}
+              <div className="mb-6 pb-6 border-b border-border-dim min-h-[100px] flex flex-col justify-center">
+                <div className="flex items-baseline gap-1.5 flex-wrap">
+                  <motion.span
+                    key={`${plan.basePrice}-${currency}-${billing}`}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-5xl font-extrabold gradient-text tracking-tight leading-none"
+                  >
+                    {formatPrice(plan.basePrice, currency, plan.basePrice === 0 ? "monthly" : billing)}
+                  </motion.span>
+                  {plan.basePrice > 0 && (
+                    <span className="text-text-muted text-base font-medium">
+                      {getCycleLabel(billing)}
+                    </span>
+                  )}
+                </div>
+                {plan.note && (
+                  <p className="text-xs text-text-muted mt-3 leading-relaxed">{plan.note}</p>
+                )}
+              </div>
+
+              {/* Specs */}
+              <ul className="space-y-3.5 mb-10 flex-1">
+                {plan.specs.map((spec) => (
+                  <li key={spec} className="flex items-start gap-3.5 text-[0.95rem] text-text-secondary">
+                    <div className="w-5 h-5 rounded-md bg-electric/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="text-electric">
+                        <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                    <span className="font-medium leading-snug">{spec}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* CTA */}
+              <MagneticButton>
+                <button
+                  onClick={onOrder}
+                  className={`w-full text-center block relative z-10 !text-base !py-4 !rounded-xl font-bold ${
+                    plan.popular ? "btn-primary" : "btn-secondary"
+                  }`}
+                >
+                  {plan.badge === "CONTACT US"
+                    ? "Contact Us"
+                    : plan.basePrice === 0
+                    ? "Get Free Server"
+                    : "Order Now"}
+                </button>
+              </MagneticButton>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
